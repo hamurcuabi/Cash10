@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:mask="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".application.SigninPhoneActivity"
+    android:background="@color/background">
+
+
+    <com.emrhmrc.cash10.util.MaskedEditText
+        android:id="@+id/edt_phone_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="55544433322"
+        android:inputType="phone"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:typeface="monospace"
+        app:keep_hint="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_phone"
+        mask:allowed_chars="1234567890"
+        mask:mask="+90 (###) ### ## ##" />
+
+    <com.emrhmrc.cash10.util.MaskedEditText
+        android:id="@+id/edt_code_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:hint="123456"
+        android:inputType="phone"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:typeface="monospace"
+        app:keep_hint="true"
+        app:layout_constraintBottom_toTopOf="@+id/btn_code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        mask:allowed_chars="1234567890"
+        mask:mask=" # # # # # # " />
+
+    <ImageView
+        android:id="@+id/img_phone"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        mask:srcCompat="@drawable/phone" />
+
+    <ImageView
+        android:id="@+id/img_security"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/edt_code_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        mask:srcCompat="@drawable/security" />
+
+    <Button
+
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/btn_rounded"
+        android:id="@+id/btn_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/send_message"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_phone_input" />
+
+    <Button
+        android:id="@+id/btn_code"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/btn_rounded"
+        android:text="@string/accept"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:textColor="@color/text_color_dark"
+        android:id="@+id/txt_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/enter_phone_number"
+        app:layout_constraintBottom_toTopOf="@+id/img_security"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_phone" />
+
+
+</android.support.constraint.ConstraintLayout>

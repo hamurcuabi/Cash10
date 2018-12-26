@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "26759226132",
+    "firebase_url": "https://parakazanapp.firebaseio.com",
+    "project_id": "parakazanapp",
+    "storage_bucket": "parakazanapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26759226132:android:bbaa750b3519b15d",
+        "android_client_info": {
+          "package_name": "com.emrhmrc.cash10"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "26759226132-l3i762rsa5fmfbgod4vq8nc9p4nh4347.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.emrhmrc.cash10",
+            "certificate_hash": "4b607285c3f585974ed6c506abc2b4e81bc4595a"
+          }
+        },
+        {
+          "client_id": "26759226132-fasbq3lnbmjdkhglk9293cngsc9bjb8g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJc4ie5q7mLBxXOfVscNrzDiJq17qhntc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "26759226132-fasbq3lnbmjdkhglk9293cngsc9bjb8g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

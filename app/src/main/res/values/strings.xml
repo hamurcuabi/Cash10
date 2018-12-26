@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">Cash10</string>
+    <string name="lang">en</string>
+    <string name="subtitle">Best App for Earn Cash</string>
+    <string name="lets_start">Lets Start</string>
+    <string name="item_three">item three info</string>
+    <string name="title_item_three">title_item_three</string>
+    <string name="item_two">item two</string>
+    <string name="title_item_two">Title_item_two</string>
+    <string name="item_one">Item_one</string>
+    <string name="title_item_one">Title_item_one</string>
+    <string name="slogan">Why Us ?</string>
+    <string name="enter_phone_number">Please Enter Your Phone Number</string>
+    <string name="enter_code">Please Enter Your Enter Code</string>
+    <string name="send_message">Send Message</string>
+    <string name="accept">Validate</string>
+    <string name="sending">Message Sending</string>
+    <string name="sended">Message Sended</string>
+    <string name="error">Opps Error</string>
+    <string name="error_phone">Wrong Number</string>
+    <string name="error_code">Opps Not Correct Try Again!</string>
+    <string name="whelling">Turning</string>
+    <string name="play">Turn</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="forget_password">Forget password?</string>
+    <string name="mail_error">Enter Email</string>
+    <string name="pass_error">Enter Password</string>
+    <string name="email">Email</string>
+    <string name="set_phone">Add Phone</string>
+    <string name="menu">Menu</string>
+    <string name="menuinfo">Fast Accesable Menu</string>
+    <string name="cevir_kazan">Turn&amp;Win</string>
+    <string name="referans">Reference</string>
+    <string name="watchwin">Watch&amp;Win</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="slot">Slot</string>
+    <string name="setting">Setting</string>
+    <string name="diger">Other</string>
+    <string name="otherinfo">Other Things</string>
+    <string name="getpay">Paying</string>
+    <string name="bankinfo">Bank</string>
+
+
+</resources>
