@@ -202,10 +202,10 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/img_ref"
+                    android:id="@+id/img_rulet"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
-                    android:src="@drawable/referans" />
+                    android:src="@drawable/paying" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -226,10 +226,10 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/img_video"
+                    android:id="@+id/img_watchads"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
-                    android:src="@drawable/video" />
+                    android:src="@drawable/watchad" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -311,7 +311,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/img_phone"
+                    android:id="@+id/img_diceroll"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:src="@drawable/phonecode" />

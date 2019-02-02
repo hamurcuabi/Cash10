@@ -100,7 +100,7 @@ public class SideHomeMenu extends AppCompatActivity implements View.OnClickListe
         linear_other = findViewById(R.id.linear_other);
         linear_bottom = findViewById(R.id.linear_bottom);
         img_home_avatar = findViewById(R.id.img_home_avatar);
-        img_phone = findViewById(R.id.img_phone);
+        img_phone = findViewById(R.id.img_diceroll);
         img_side_avatar = findViewById(R.id.img_side_avatar);
         img_wheel = findViewById(R.id.img_wheel);
         btn_exit = findViewById(R.id.btn_exit);
@@ -163,7 +163,7 @@ public class SideHomeMenu extends AppCompatActivity implements View.OnClickListe
                 goWheel();
                 break;
 
-            case R.id.img_phone:
+            case R.id.img_diceroll:
                 goPhone();
                 break;
             case R.id.img_slot:

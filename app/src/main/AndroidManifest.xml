@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1202140444527551~5620883183" />
+
         <activity
             android:name=".application.HomeActivity"
             android:launchMode="singleTask">
@@ -25,7 +29,7 @@
             android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".application.SideHomeMenu"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop"></activity>
         <activity
             android:name=".application.WheelActivity"
             android:launchMode="singleTop" />
@@ -34,12 +38,14 @@
             android:launchMode="singleTask" />
         <activity
             android:name=".application.SlotGameActivty"
-            android:launchMode="singleTop"></activity>
+            android:launchMode="singleTop" />
         <activity
             android:name=".application.NewSideHomeMenu"
-            android:launchMode="singleTask">
-
-        </activity>
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".application.CasinoGameActivity" />
+        <activity android:name=".application.CoinFlipActivity"></activity>
+        <activity android:name=".application.DiceActivity"></activity>
+        <activity android:name=".application.PayActivity"></activity>
     </application>
 
 </manifest>

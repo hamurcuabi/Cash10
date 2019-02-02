@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_color2"
-    >
+    android:background="@drawable/bg_color2">
 
 
     <Button
@@ -30,7 +28,6 @@
         app:layout_constraintVertical_bias="0.261" />
 
     <android.support.constraint.ConstraintLayout
-        android:background="@drawable/btn_shape_default"
         android:id="@+id/lnr_wheel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,6 +35,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/btn_shape_default"
         app:layout_constraintBottom_toTopOf="@+id/start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -45,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/img_diamond">
 
         <ImageView
-            android:id="@+id/image1"
+            android:id="@+id/img1"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_marginStart="8dp"
@@ -69,7 +67,7 @@
             android:src="@drawable/ic_android"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/image3"
-            app:layout_constraintStart_toEndOf="@+id/image1"
+            app:layout_constraintStart_toEndOf="@+id/img1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -87,6 +85,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/popup_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/information"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lnr_wheel" />
 
     <Button
         android:id="@+id/start"
@@ -152,8 +160,8 @@
 
     <ImageView
         android:id="@+id/img_diamond"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"

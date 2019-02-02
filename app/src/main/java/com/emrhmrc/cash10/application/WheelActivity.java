@@ -1,14 +1,22 @@
 package com.emrhmrc.cash10.application;
 
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.emrhmrc.cash10.R;
@@ -16,7 +24,6 @@ import com.emrhmrc.cash10.WheelGame.LuckyWheelView;
 import com.emrhmrc.cash10.WheelGame.model.LuckyItem;
 import com.emrhmrc.cash10.api.Database;
 import com.emrhmrc.cash10.helper.SharedPref;
-import com.emrhmrc.cash10.helper.SingletonUser;
 import com.emrhmrc.cash10.util.TextFont;
 import com.emrhmrc.cash10.util.Utils;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -45,7 +52,8 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
     private List<LuckyItem> model;
     private Animation small_to_big, zoom_in;
     private DocumentReference pointRef;
-    private ImageView img_point, img_bank, img_diamond;
+    private ImageView img_point, img_bank, img_diamond, img_popup;
+    private Point p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +64,7 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         initClick();
         //  canPlay();
         setTextCount(Utils.MAX_WHEEL_COUNT - pref.getWheelPlayed());
-        Log.d(TAG, "onCreate: "+pref.getUserId());
+        Log.d(TAG, "onCreate: " + pref.getUserId());
 
     }
 
@@ -120,6 +128,8 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void init() {
+        img_popup = findViewById(R.id.popup_info);
+        img_popup.setOnClickListener(this);
         btn_play = findViewById(R.id.play);
         luckyWheelView = findViewById(R.id.luckyWheel);
         luckyWheelView.setData(model);
@@ -157,8 +167,8 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
     private List<LuckyItem> whellItems() {
         List<LuckyItem> data = new ArrayList<>();
         LuckyItem luckyItem1 = new LuckyItem();
-        luckyItem1.text = "2";
-        luckyItem1.point = 2;
+        luckyItem1.text = "1000";
+        luckyItem1.point = 1000;
         luckyItem1.icon = R.drawable.diamond;
         luckyItem1.with_icon = true;
         luckyItem1.color = 0xffFFF3E0;
@@ -261,8 +271,8 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         data.add(luckyItem14);
 
         LuckyItem luckyItem15 = new LuckyItem();
-        luckyItem15.text = "4";
-        luckyItem15.point = 4;
+        luckyItem15.text = "750";
+        luckyItem15.point = 750;
         luckyItem15.icon = R.drawable.diamond;
         luckyItem15.with_icon = true;
         luckyItem15.color = 0xffFFCC80;
@@ -308,6 +318,9 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
             case R.id.play:
                 playing();
                 break;
+            case R.id.popup_info:
+                if (p != null) showPopup(WheelActivity.this, p);
+                break;
         }
     }
 
@@ -345,7 +358,7 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d(TAG, "onFailure: ."+e.getMessage());
+                Log.d(TAG, "onFailure: ." + e.getMessage());
             }
         });
     }
@@ -406,6 +419,59 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onStop() {
         super.onStop();
+
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+
+        int[] location = new int[2];
+
+        // Get the x, y location and store it in the location[] array
+        // location[0] = x, location[1] = y.
+        img_diamond.getLocationOnScreen(location);
+
+        //Initialize the Point with x, and y positions
+        p = new Point();
+        p.x = location[0];
+        p.y = location[1];
+    }
+
+    // The method that displays the popup.
+    private void showPopup(final Activity context, Point p) {
+        // Get the x, y location and store it in the location[] array
+        // location[0] = x, location[1] = y.
+
+        //Initialize the Point with x, and y positions
+
+
+        int popupWidth = 200;
+        int popupHeight = 150;
+
+        // Inflate the popup_layout.xml
+        LinearLayout viewGroup = context.findViewById(R.id.popuplnr);
+        LayoutInflater layoutInflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.popup_layout, viewGroup, false);
+
+        // Creating the PopupWindow
+        final PopupWindow popup = new PopupWindow(context);
+        popup.setContentView(layout);
+        /*popup.setWidth(popupWidth);
+        popup.setHeight(popupHeight);*/
+        popup.setFocusable(true);
+
+        // Some offset to align the popup a bit to the right, and a bit down, relative to button's position.
+        int OFFSET_X = 0;
+        int OFFSET_Y = 0;
+        // Clear the default translucent background
+        popup.setBackgroundDrawable(new BitmapDrawable());
+        // Displaying the popup at the specified location, + offsets.
+        popup.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
+
+        // Getting a reference to Close button, and close the popup when clicked.
+        TextView info = layout.findViewById(R.id.txt_info);
+        info.setText(getResources().getString(R.string.info_whell));
 
     }
 }

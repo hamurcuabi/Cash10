@@ -13,8 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.emrhmrc.cash10.R;
-import com.emrhmrc.cash10.api.ApiClient;
 import com.emrhmrc.cash10.api.Database;
+import com.emrhmrc.cash10.api.GoogleSignClient;
+import com.emrhmrc.cash10.api.OneSignalTask;
 import com.emrhmrc.cash10.helper.SharedPref;
 import com.emrhmrc.cash10.helper.SingletonUser;
 import com.emrhmrc.cash10.model.UserModel;
@@ -35,6 +36,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.onesignal.OneSignal;
 
 public class SigninGoogleActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -61,7 +63,7 @@ public class SigninGoogleActivity extends AppCompatActivity implements View.OnCl
         initAnim();
 
         mAuth = FirebaseAuth.getInstance();
-        mGoogleSignInClient = ApiClient.getClient(getApplicationContext());
+        mGoogleSignInClient = GoogleSignClient.getClient(getApplicationContext());
 
 
     }
@@ -179,6 +181,9 @@ public class SigninGoogleActivity extends AppCompatActivity implements View.OnCl
                             if (userModel.getEmail().equals(email)) {
                                 //User exist
                                 is_exist = true;
+                                pref.setUserPass(userModel.getPassword());
+                                pref.setUserMail(userModel.getEmail());
+                                SingletonUser.getInstance().setUserModel(userModel);
 
                             }
                             if (is_exist) {
@@ -205,6 +210,17 @@ public class SigninGoogleActivity extends AppCompatActivity implements View.OnCl
                             userModel.setPoint(1000);
                             userModel.setStar(0);
                             userModel.setPassword(Utils.getRandomString(5));
+                            userModel.setAdmin(false);
+                            OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
+                                @Override
+                                public void idsAvailable(String userId, String registrationId) {
+                                    Log.d(TAG, "User:" + userId);
+                                    userModel.setPlayerId(userId);
+                                    if (registrationId != null)
+                                        Log.d(TAG, "registrationId:" + registrationId);
+
+                                }
+                            });
 
                             Database.getUserRef().add(userModel).addOnSuccessListener(
                                     new OnSuccessListener<DocumentReference>() {

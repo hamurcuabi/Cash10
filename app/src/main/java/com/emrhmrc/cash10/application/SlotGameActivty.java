@@ -1,14 +1,22 @@
 package com.emrhmrc.cash10.application;
 
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +52,8 @@ public class SlotGameActivty extends AppCompatActivity {
     private DocumentReference pointRef;
     private TextView txt_point, txt_bank, txt_diamond;
     private Animation small_to_big, zoom_in;
-    private ImageView img_point, img_bank, img_diamond;
+    private ImageView img_point, img_bank, img_diamond, img_popup;
+    private Point p;
 
     private RandomizerRunnable[] randomizerRunnables;
     private int currentRunnable;
@@ -57,6 +66,7 @@ public class SlotGameActivty extends AppCompatActivity {
         setContentView(R.layout.activity_slot_game_activty);
 
         isResuming = false;
+        img_popup = findViewById(R.id.popup_info);
         txt_point = findViewById(R.id.txt_point);
         txt_bank = findViewById(R.id.txt_bank);
         txt_diamond = findViewById(R.id.txt_diamond);
@@ -76,7 +86,7 @@ public class SlotGameActivty extends AppCompatActivity {
         pointRef = Database.getUserInfo(pref.getUserId());
         randomizerRunnables = new RandomizerRunnable[3];
 
-        image1 = findViewById(R.id.image1);
+        image1 = findViewById(R.id.img1);
         image2 = findViewById(R.id.image2);
         image3 = findViewById(R.id.image3);
         start = findViewById(R.id.start);
@@ -97,6 +107,12 @@ public class SlotGameActivty extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 stopRoll();
+            }
+        });
+        img_popup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (p != null) showPopup(SlotGameActivty.this, p);
             }
         });
     }
@@ -168,12 +184,14 @@ public class SlotGameActivty extends AppCompatActivity {
 
             if (image1Tag.equalsIgnoreCase(image2Tag) && image2Tag.equalsIgnoreCase(image3Tag)) {
                 executeTransaction(500);
+                Toast.makeText(this, "500!!", Toast.LENGTH_SHORT).show();
             } else if (image1Tag.equalsIgnoreCase(image2Tag) || image2Tag.equalsIgnoreCase
                     (image3Tag) || image1Tag.equalsIgnoreCase(image3Tag)) {
 
                 executeTransaction(200);
+                Toast.makeText(this, "200!!", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Kaybettiniz!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Tekrar Dene!!", Toast.LENGTH_SHORT).show();
             }
             start.animate().alpha(1).translationX(0).setDuration(400).start();
             start.setEnabled(true);
@@ -248,6 +266,9 @@ public class SlotGameActivty extends AppCompatActivity {
                     txt_point.setText("" + point);
                     double tl = (double) point / Utils.TL_POINT;
                     txt_bank.setText(String.valueOf(tl) + " ₺");
+                    txt_bank.startAnimation(small_to_big);
+                    txt_point.startAnimation(small_to_big);
+                    txt_diamond.startAnimation(small_to_big);
 
                 }
             }
@@ -299,5 +320,57 @@ public class SlotGameActivty extends AppCompatActivity {
                 }
             }
         }
+    }
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+
+        int[] location = new int[2];
+
+        // Get the x, y location and store it in the location[] array
+        // location[0] = x, location[1] = y.
+        img_diamond.getLocationOnScreen(location);
+
+        //Initialize the Point with x, and y positions
+        p = new Point();
+        p.x = location[0];
+        p.y = location[1];
+    }
+
+    // The method that displays the popup.
+    private void showPopup(final Activity context, Point p) {
+        // Get the x, y location and store it in the location[] array
+        // location[0] = x, location[1] = y.
+
+        //Initialize the Point with x, and y positions
+
+
+        int popupWidth = 200;
+        int popupHeight = 150;
+
+        // Inflate the popup_layout.xml
+        LinearLayout viewGroup = context.findViewById(R.id.popuplnr);
+        LayoutInflater layoutInflater = (LayoutInflater) context
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = layoutInflater.inflate(R.layout.popup_layout, viewGroup, false);
+
+        // Creating the PopupWindow
+        final PopupWindow popup = new PopupWindow(context);
+        popup.setContentView(layout);
+        /*popup.setWidth(popupWidth);
+        popup.setHeight(popupHeight);*/
+        popup.setFocusable(true);
+
+        // Some offset to align the popup a bit to the right, and a bit down, relative to button's position.
+        int OFFSET_X = 0;
+        int OFFSET_Y = 0;
+        // Clear the default translucent background
+        popup.setBackgroundDrawable(new BitmapDrawable());
+        // Displaying the popup at the specified location, + offsets.
+        popup.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
+
+        // Getting a reference to Close button, and close the popup when clicked.
+        TextView info = layout.findViewById(R.id.txt_info);
+        info.setText(getResources().getString(R.string.info_slot));
+
     }
 }

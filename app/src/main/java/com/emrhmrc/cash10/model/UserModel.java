@@ -9,6 +9,24 @@ public class UserModel {
     private String password;
     private int point;
     private int star;
+    private boolean isAdmin;
+    private String playerId;
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public String getPlayerId() {
+        return playerId;
+    }
+
+    public void setPlayerId(String playerId) {
+        this.playerId = playerId;
+    }
 
     public UserModel() {
     }

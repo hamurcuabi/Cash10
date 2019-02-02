@@ -17,6 +17,7 @@ public class SharedPref {
     private static final String USER_ID = "UserID";
     private static final String USER_MAIL = "UserMail";
     private static final String USER_PASS = "UserPass";
+    private static final String LAST_AD_TIME = "LAST_AD_TIME";
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     Context context;
@@ -101,6 +102,14 @@ public class SharedPref {
 
     public void setUserPass(String pass) {
         editor.putString(USER_PASS, pass);
+        editor.commit();
+    }
+    public String getLastAdTime() {
+        return pref.getString(LAST_AD_TIME, "");
+    }
+
+    public void setLastAdTime(String lastAdTime) {
+        editor.putString(LAST_AD_TIME, lastAdTime);
         editor.commit();
     }
 }

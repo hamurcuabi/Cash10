@@ -82,7 +82,7 @@
             android:id="@+id/img_diamond"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            app:srcCompat="@drawable/ic_cutter" />
+            app:srcCompat="@drawable/diamond" />
 
         <TextView
             android:id="@+id/txt_diamond"

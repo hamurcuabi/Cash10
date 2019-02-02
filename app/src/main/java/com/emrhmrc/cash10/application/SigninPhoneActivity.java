@@ -119,7 +119,7 @@ public class SigninPhoneActivity extends AppCompatActivity implements View.OnCli
     private void init() {
         pref = new SharedPref(getApplicationContext());
         mAuth = FirebaseAuth.getInstance();
-        img_phone = findViewById(R.id.img_phone);
+        img_phone = findViewById(R.id.img_diceroll);
         img_security = findViewById(R.id.img_security);
         edt_phone_input = findViewById(R.id.edt_phone_input);
         edt_code_input = findViewById(R.id.edt_code_input);

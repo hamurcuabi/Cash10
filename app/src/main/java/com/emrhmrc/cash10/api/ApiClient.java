@@ -1,29 +1,23 @@
 package com.emrhmrc.cash10.api;
 
-import android.content.Context;
-
-import com.emrhmrc.cash10.R;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
     private static final String TAG = "ApiClient";
-    private static GoogleSignInOptions gso = null;
-    private static GoogleSignInClient mGoogleSignInClient = null;
+    private static Retrofit retrofit = null;
+    private static String Base_Url = "http://infinitemobile.site/api/";
 
-    public static GoogleSignInClient getClient(Context context) {
-        if (gso == null) {
-            gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken(context.getString(R.string.default_web_client_id))
-                    .requestEmail()
+    public static Retrofit getClient() {
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(Base_Url)
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
+            return retrofit;
         }
-        if (mGoogleSignInClient == null) {
-            mGoogleSignInClient = GoogleSignIn.getClient(context, gso);
-        }
+        return retrofit;
 
-        return mGoogleSignInClient;
     }
 }
-

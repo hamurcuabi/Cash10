@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -11,23 +12,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.emrhmrc.cash10.R;
+import com.emrhmrc.cash10.api.OneSignalTask;
 import com.emrhmrc.cash10.helper.SharedPref;
 import com.emrhmrc.cash10.util.TextFont;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.onesignal.OneSignal;
 
 public class HomeActivity extends AppCompatActivity {
+    private static final String TAG = "HomeActivity";
     private TextView txt_title, txt_subtitle, txt_start;
     private Animation small_to_big, fleft, fhelper, ftop, ftophelper;
     private ImageView img_splash;
     private SharedPref pref;
     private FirebaseAuth.AuthStateListener authStateListener;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-       // initmAuthState();
+        // initmAuthState();
 
 
         init();
@@ -43,13 +48,33 @@ public class HomeActivity extends AppCompatActivity {
                 Intent i = new Intent(HomeActivity.this, LoginActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.fleft, R.anim.fhelper);
+                finish();
 
             }
         });
 
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+
 
     }
 
+    private void sendPush(){
+        OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
+            @Override
+            public void idsAvailable(String userId, String registrationId) {
+                Log.d(TAG, "User:" + userId);
+                OneSignalTask oneSignalTask = new OneSignalTask();
+                oneSignalTask.execute(userId, "Hey Benimm Yahu");
+                if (registrationId != null)
+                    Log.d(TAG, "registrationId:" + registrationId);
+
+            }
+        });
+    }
     private void initmAuthState() {
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override

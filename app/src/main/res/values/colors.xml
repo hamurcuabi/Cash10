@@ -9,6 +9,9 @@
     <color name="bg_side_menu">#1E2E61</color>
     <color name="stop">#CF142B</color>
 
+    <color name="onesignal_bgimage_notif_title_color">#FF4ED4DE</color>
+    <color name="onesignal_bgimage_notif_body_color">#FF008577</color>
+
 
 
 </resources>

@@ -104,11 +104,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 isEnabled(true);
                                 pref.setUserMail(edt_email.getText().toString());
                                 pref.setUserPass(edt_password.getText().toString());
+                                pref.setUserId(model.getDocId());
                                 SingletonUser.getInstance().setUserModel(model);
                                 Intent i = new Intent(LoginActivity.this, NewSideHomeMenu.class);
                                 startActivity(i);
                                 overridePendingTransition(R.anim.fleft, R.anim.fhelper);
-
+                                finish();
 
                             }
                         }

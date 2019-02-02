@@ -3,7 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorPrimaryDark"
     android:layout_height="match_parent">
+
+    <WebView
+        android:visibility="gone"
+        android:id="@+id/img_gif"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <ImageView
         android:id="@+id/img_home_avatar"
@@ -34,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/menu"
+        android:text="@string/games"
         android:textColor="@color/text_color_dark"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -48,8 +60,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/menuinfo"
-        android:textColor="@color/text_color"
+        android:text="@string/gameinfo"
+        android:textColor="@android:color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -61,13 +73,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/turnwheel"
+        android:src="@drawable/whell"
         app:layout_constraintEnd_toStartOf="@+id/img_slot"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
-        android:id="@+id/txt_wheel_info"
+        android:id="@+id/txt_wheel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -88,13 +100,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/slott"
-        app:layout_constraintEnd_toStartOf="@+id/img_video"
+        android:src="@drawable/slot"
+        app:layout_constraintEnd_toStartOf="@+id/img_watchads"
         app:layout_constraintStart_toEndOf="@id/img_wheel"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
-        android:id="@+id/txt_slot_info"
+        android:id="@+id/txt_slot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -107,20 +119,19 @@
         app:layout_constraintTop_toBottomOf="@+id/img_slot" />
 
     <ImageView
-        android:id="@+id/img_video"
+        android:id="@+id/img_watchads"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-
         android:layout_marginEnd="16dp"
-        android:src="@drawable/video"
+        android:src="@drawable/watchad"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/img_slot"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
-        android:id="@+id/txt_video_info"
+        android:id="@+id/txt_watchadds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -128,56 +139,82 @@
         android:text="@string/watchwin"
         android:textColor="@color/text_color_dark"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/img_video"
-        app:layout_constraintStart_toStartOf="@+id/img_video"
-        app:layout_constraintTop_toBottomOf="@+id/img_video" />
-
+        app:layout_constraintEnd_toEndOf="@+id/img_watchads"
+        app:layout_constraintStart_toStartOf="@+id/img_watchads"
+        app:layout_constraintTop_toBottomOf="@+id/img_watchads" />
 
     <ImageView
-        android:id="@+id/img_phone"
+        android:id="@+id/img_headcoins"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:src="@drawable/phonecode"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@id/img_wheel"
-        app:layout_constraintTop_toBottomOf="@+id/txt_wheel_info"
-         />
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/cointoss"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img_rulet"
+        app:layout_constraintTop_toBottomOf="@+id/txt_watchadds" />
 
     <TextView
-        android:id="@+id/txt_phone_info"
+        android:id="@+id/txt_headcoins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
-        android:text="@string/set_phone"
+        android:text="@string/toss"
         android:textColor="@color/text_color_dark"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/img_phone"
-        app:layout_constraintStart_toStartOf="@+id/img_phone"
-        app:layout_constraintTop_toBottomOf="@+id/img_phone" />
+        app:layout_constraintEnd_toEndOf="@+id/img_headcoins"
+        app:layout_constraintStart_toStartOf="@+id/img_headcoins"
+        app:layout_constraintTop_toBottomOf="@+id/img_headcoins" />
+
 
     <ImageView
-        android:id="@+id/img_ref"
+        android:id="@+id/img_diceroll"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:src="@drawable/referans"
+        android:src="@drawable/dices"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/img_wheel"
+        app:layout_constraintTop_toBottomOf="@+id/txt_wheel"
+         />
+
+    <TextView
+        android:id="@+id/txt_diceroll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="@string/diceroll"
+        android:textColor="@color/text_color_dark"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/img_diceroll"
+        app:layout_constraintStart_toStartOf="@+id/img_diceroll"
+        app:layout_constraintTop_toBottomOf="@+id/img_diceroll" />
+
+    <ImageView
+        android:id="@+id/img_rulet"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:src="@drawable/rulet"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@id/img_slot"
-        app:layout_constraintTop_toBottomOf="@+id/txt_wheel_info"
+        app:layout_constraintTop_toBottomOf="@+id/txt_wheel"
 
          />
 
     <TextView
-        android:id="@+id/txt_ref_info"
+        android:id="@+id/txt_rulet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/referans"
+        android:text="@string/rulet"
         android:textColor="@color/text_color_dark"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/img_ref"
-        app:layout_constraintStart_toStartOf="@+id/img_ref"
-        app:layout_constraintTop_toBottomOf="@+id/img_ref" />
+        app:layout_constraintEnd_toEndOf="@+id/img_rulet"
+        app:layout_constraintStart_toStartOf="@+id/img_rulet"
+        app:layout_constraintTop_toBottomOf="@+id/img_rulet" />
+
 
     <TextView
         android:id="@+id/textView6"
@@ -190,7 +227,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_phone_info" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_diceroll" />
 
     <TextView
         android:id="@+id/textview4"
@@ -200,59 +237,82 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/otherinfo"
-        android:textColor="@color/text_color"
+        android:textColor="@android:color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
     <ImageView
-        android:id="@+id/img_setting"
+        android:id="@+id/img_addphone"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/setting"
+        android:src="@drawable/addphone"
         app:layout_constraintEnd_toStartOf="@+id/img_slot"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview4" />
 
     <TextView
-        android:id="@+id/txt_setting_info"
+        android:id="@+id/txt_addphone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
-        android:text="@string/setting"
+        android:text="@string/set_phone"
         android:textColor="@color/text_color_dark"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/img_setting"
-        app:layout_constraintStart_toStartOf="@+id/img_setting"
-        app:layout_constraintTop_toBottomOf="@+id/img_setting" />
+        app:layout_constraintEnd_toEndOf="@+id/img_addphone"
+        app:layout_constraintStart_toStartOf="@+id/img_addphone"
+        app:layout_constraintTop_toBottomOf="@+id/img_addphone" />
 
 
     <ImageView
         android:id="@+id/img_pay"
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:src="@drawable/pay"
         android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@id/img_slot"
-        app:layout_constraintTop_toBottomOf="@+id/textview4"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/paying"
+        app:layout_constraintEnd_toStartOf="@+id/img_notif"
 
-        />
+        app:layout_constraintStart_toStartOf="@id/img_slot"
+        app:layout_constraintTop_toBottomOf="@+id/textview4" />
 
     <TextView
-        android:id="@+id/txt_pay_info"
+        android:id="@+id/txt_pay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/getpay"
         android:textColor="@color/text_color_dark"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/img_pay"
         app:layout_constraintStart_toStartOf="@+id/img_pay"
         app:layout_constraintTop_toBottomOf="@+id/img_pay" />
 
+    <ImageView
+        android:id="@+id/img_notif"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+
+        android:src="@drawable/ads"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/img_watchads"
+        app:layout_constraintTop_toBottomOf="@+id/textview4" />
+
+    <TextView
+        android:id="@+id/txt_notif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/notif"
+        android:textColor="@color/text_color_dark"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/img_notif"
+        app:layout_constraintStart_toStartOf="@+id/img_notif"
+        app:layout_constraintTop_toBottomOf="@+id/img_notif" />
     <ImageView
         android:id="@+id/img_bank"
         android:layout_width="32dp"
