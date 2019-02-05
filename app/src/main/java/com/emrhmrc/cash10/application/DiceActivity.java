@@ -24,11 +24,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emrehmrc.tostcu.Tostcu;
 import com.emrhmrc.cash10.R;
 import com.emrhmrc.cash10.api.Database;
 import com.emrhmrc.cash10.helper.SharedPref;
 import com.emrhmrc.cash10.util.TextFont;
 import com.emrhmrc.cash10.util.Utils;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -57,7 +63,8 @@ public class DiceActivity extends AppCompatActivity {
     private ImageView img_point, img_bank, img_diamond, img_popup;
     private Point p;
     private Animation small_to_big;
-
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
     public static int randomDiceValue() {
         return RANDOM.nextInt(6) + 1;
     }
@@ -66,6 +73,7 @@ public class DiceActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dice);
+        initAdd();
         img_popup = findViewById(R.id.popup_info);
         small_to_big = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.small_to_big);
         txt_point = findViewById(R.id.txt_point);
@@ -170,8 +178,7 @@ public class DiceActivity extends AppCompatActivity {
                             }
                             if (current == index) {
                                 win_count += 500;
-                                Toast.makeText(getApplicationContext(), "1.Tahminden 500!", Toast
-                                        .LENGTH_SHORT).show();
+                                Tostcu.succes(getApplicationContext(),"1.Tahminden 500!");
                             }
 
 
@@ -205,14 +212,16 @@ public class DiceActivity extends AppCompatActivity {
                             }
                             if (current2 == index2) {
                                 win_count += 500;
-                                Toast.makeText(getApplicationContext(), "2.Tahminden 500!", Toast
-                                        .LENGTH_SHORT).show();
+                                Tostcu.succes(getApplicationContext(),"2.Tahminden 500!");
                             }
                         }
+                        else Tostcu.error(getApplicationContext(),"Tekrar Dene!");
                         if (win_count > 0) executeTransaction(win_count);
                         mediaPlayer.stop();
                         btn_start.setEnabled(true);
-
+                        if (mInterstitialAd.isLoaded()) {
+                            mInterstitialAd.show();
+                        }
                     }
 
                     @Override
@@ -235,7 +244,24 @@ public class DiceActivity extends AppCompatActivity {
             }
         });
     }
+    private void initAdd() {
+        MobileAds.initialize(this,
+                "ca-app-pub-3940256099942544~3347511713");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
 
+        });
+    }
     private void setTextCount(long i) {
         txt_point.setText(String.valueOf(i));
         double tl = (double) i / Utils.TL_POINT;

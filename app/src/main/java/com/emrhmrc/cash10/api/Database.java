@@ -45,9 +45,9 @@ public class Database {
 
     public static DocumentReference getUserInfo(String id) {
 
-        if (userInfo == null) {
+
             userInfo = getDb().document("User/" + id);
-        }
+
         return userInfo;
     }
 

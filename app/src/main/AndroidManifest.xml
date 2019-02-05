@@ -29,7 +29,7 @@
             android:windowSoftInputMode="stateVisible" />
         <activity
             android:name=".application.SideHomeMenu"
-            android:launchMode="singleTop"></activity>
+            android:launchMode="singleTop" />
         <activity
             android:name=".application.WheelActivity"
             android:launchMode="singleTop" />
@@ -41,11 +41,14 @@
             android:launchMode="singleTop" />
         <activity
             android:name=".application.NewSideHomeMenu"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask" />
         <activity android:name=".application.CasinoGameActivity" />
-        <activity android:name=".application.CoinFlipActivity"></activity>
-        <activity android:name=".application.DiceActivity"></activity>
-        <activity android:name=".application.PayActivity"></activity>
+        <activity android:name=".application.CoinFlipActivity" />
+        <activity android:name=".application.DiceActivity" />
+        <activity android:name=".application.PayActivity" />
+        <activity android:name=".application.NotifListActivity" />
+        <activity android:name=".application.NotifDetailActivity" />
+        <activity android:name=".application.MerketActivity"></activity>
     </application>
 
 </manifest>

@@ -15,6 +15,9 @@ import com.emrhmrc.cash10.R;
 import com.emrhmrc.cash10.api.OneSignalTask;
 import com.emrhmrc.cash10.helper.SharedPref;
 import com.emrhmrc.cash10.util.TextFont;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.onesignal.OneSignal;
@@ -27,14 +30,14 @@ public class HomeActivity extends AppCompatActivity {
     private SharedPref pref;
     private FirebaseAuth.AuthStateListener authStateListener;
 
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         // initmAuthState();
-
-
+        initAdd();
         init();
         initAnim();
         txt_title.setTypeface(TextFont.logo(getApplicationContext()));
@@ -62,7 +65,15 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private void sendPush(){
+    private void initAdd() {
+        MobileAds.initialize(this,
+                "ca-app-pub-3940256099942544~3347511713");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
+
+    private void sendPush() {
         OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
             @Override
             public void idsAvailable(String userId, String registrationId) {
@@ -75,6 +86,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
+
     private void initmAuthState() {
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override

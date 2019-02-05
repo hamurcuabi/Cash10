@@ -11,6 +11,24 @@ public class UserModel {
     private int star;
     private boolean isAdmin;
     private String playerId;
+    private String ref_code;
+    private boolean used_ref;
+
+    public boolean isUsed_ref() {
+        return used_ref;
+    }
+
+    public void setUsed_ref(boolean used_ref) {
+        this.used_ref = used_ref;
+    }
+
+    public String getRef_code() {
+        return ref_code;
+    }
+
+    public void setRef_code(String ref_code) {
+        this.ref_code = ref_code;
+    }
 
     public boolean isAdmin() {
         return isAdmin;

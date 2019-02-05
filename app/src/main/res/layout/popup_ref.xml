@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popuplnr"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@drawable/btn_rounded_dark"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginTop="2dp"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        android:id="@+id/txt_ref"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:text="@string/info"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/message_inputlayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/MyStyle"
+       >
+
+        <android.support.design.widget.TextInputEditText
+
+            android:id="@+id/edt_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:gravity="start"
+            android:hint="@string/refkod"
+            android:inputType="text"
+            android:textColor="#fff"
+            android:textColorHint="#fff" />
+
+
+    </android.support.design.widget.TextInputLayout>
+    <Button
+        android:layout_gravity="center"
+        android:id="@+id/btn_send"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_signup"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/send"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        android:textStyle="normal"/>
+
+
+</LinearLayout>

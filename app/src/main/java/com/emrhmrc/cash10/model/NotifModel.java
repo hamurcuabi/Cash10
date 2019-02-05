@@ -9,6 +9,37 @@ public class NotifModel {
     private boolean isdone;
     private String methode;
     private String admin_message;
+    private String date;
+    private String notifDocId;
+    private String playId;
+
+
+    public NotifModel() {
+    }
+
+    public String getPlayId() {
+        return playId;
+    }
+
+    public void setPlayId(String playId) {
+        this.playId = playId;
+    }
+
+    public String getNotifDocId() {
+        return notifDocId;
+    }
+
+    public void setNotifDocId(String notifDocId) {
+        this.notifDocId = notifDocId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getAdmin_message() {
         return admin_message;
@@ -24,9 +55,6 @@ public class NotifModel {
 
     public void setMethode(String methode) {
         this.methode = methode;
-    }
-
-    public NotifModel() {
     }
 
     public String getDocId() {

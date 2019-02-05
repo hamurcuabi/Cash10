@@ -2,13 +2,13 @@
     <string name="app_name">Cash10</string>
     <string name="subtitle">Mobilden Para Kazandıran En Güzel Uygulama</string>
     <string name="lets_start">Hemen Başla</string>
-    <string name="item_three">İçerik üç bilgi</string>
-    <string name="title_item_three">Başlık üç</string>
-    <string name="item_two">İçerik iki</string>
-    <string name="title_item_two">İkinci Başlık</string>
-    <string name="item_one">İçerik bir</string>
+    <string name="item_three">Anında haberdarsınız</string>
+    <string name="title_item_three">Bildirim Sistemli</string>
+    <string name="item_two">Çeşitli ödeme yöntemleri</string>
+    <string name="title_item_two">Ödeme Seçenekli</string>
+    <string name="item_one">Aynı gün içinde anında!</string>
     <string name="lang">tr</string>
-    <string name="title_item_one">Birinci Başlık</string>
+    <string name="title_item_one">Ödeme Garantili</string>
     <string name="slogan">Neden Biz ?</string>
     <string name="enter_phone_number">Telefon Numaranızı Giriniz</string>
     <string name="enter_code">Gönderilen Kodu Giriniz</string>
@@ -51,7 +51,7 @@
     <string name="toss">Yazı Tura</string>
     <string name="notif">Duyurular</string>
     <string name="flip">Parayı Fırlat</string>
-    <string name="info">Bilgiledirme</string>
+    <string name="info">Bilgilendirme</string>
     <string name="info_whell">Çarkı çevir ve gelen değer kadar puan ve elmas kazan!</string>
     <string name="info_dice">Zardan geleni tahmin et ve her doğru tahmin için 500 puan al!</string>
     <string name="info_coin">Dolar mı , 3 Yaprak mı tahmin et 500 puan al!</string>
@@ -66,5 +66,22 @@
     <string name="bilgi">Hesap bilgilerinizi eksiksiz bir şekilde yazınız. Ayrıca eklemek istediğiniz bişeyi de yazabilirsiniz.</string>
     <string name="hesap">Hesap Bilgileriniz</string>
     <string name="banka">2) Gerekli Bilgileri Giriniz</string>
+    <string name="ad">Ad Soyad</string>
+    <string name="mail">Email</string>
+    <string name="tarih">Tarih</string>
+    <string name="usermsj">Üye Mesajı</string>
+    <string name="tel">Telefon</string>
+    <string name="metod">Ödeme Şekli</string>
+    <string name="adminmsj">Admin Mesajı</string>
+    <string name="iptal">İptal</string>
+    <string name="onayla">Onayla</string>
+    <string name="mailtel">Email/Telefon</string>
+    <string name="faillogin">Giriş Başarısız</string>
+    <string name="succes">Başarılı</string>
+    <string name="market">Elmas Marketi</string>
+    <string name="ref">Referans</string>
+    <string name="refkod">Referans Kodunu Giriniz</string>
+    <string name="reff">Ref.</string>
+    <string name="kodunuz">Kodunuz:</string>
 
 </resources>

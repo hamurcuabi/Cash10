@@ -253,7 +253,7 @@
                     android:id="@+id/img_wheel"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
-                    android:src="@drawable/dolar" />
+                     />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -290,7 +290,7 @@
                 <ImageView
                     android:layout_width="72dp"
                     android:layout_height="72dp"
-                    android:src="@drawable/message" />
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -337,7 +337,7 @@
                     android:id="@+id/img_slot"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
-                    android:src="@drawable/dolar" />
+                     />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -402,7 +402,7 @@
                 <ImageView
                     android:layout_width="72dp"
                     android:layout_height="72dp"
-                    android:src="@drawable/setting" />
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"

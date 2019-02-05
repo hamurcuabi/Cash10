@@ -11,13 +11,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.emrehmrc.tostcu.Tostcu;
 import com.emrhmrc.cash10.R;
 import com.emrhmrc.cash10.api.Database;
 import com.emrhmrc.cash10.api.OneSignalTask;
+import com.emrhmrc.cash10.helper.Functions;
 import com.emrhmrc.cash10.helper.SharedPref;
 import com.emrhmrc.cash10.helper.SingletonUser;
 import com.emrhmrc.cash10.model.NotifModel;
 import com.emrhmrc.cash10.model.UserModel;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -43,11 +48,13 @@ public class PayActivity extends AppCompatActivity {
     private String methode;
     private boolean is_login;
     private String adminId;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
+        initAdd();
         init();
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +63,14 @@ public class PayActivity extends AppCompatActivity {
                 getAdminId();
             }
         });
+    }
+
+    private void initAdd() {
+        MobileAds.initialize(this,
+                "ca-app-pub-3940256099942544~3347511713");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     private void getAdminId() {
@@ -97,14 +112,20 @@ public class PayActivity extends AppCompatActivity {
         notifModel.setPhone(userModel.getPhone());
         notifModel.setMethode(methode);
         notifModel.setAdmin_message("");
+        notifModel.setDate(Functions.DateToText());
+        notifModel.setPlayId(SingletonUser.getInstance().getUserModel().getPlayerId());
 
         Database.getUserNotif().add(notifModel).addOnSuccessListener(
                 new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
+                        String docId = documentReference.getId();
+                        notifModel.setNotifDocId(docId);
+                        documentReference.update("notifDocId", docId);
                         OneSignalTask oneSignalTask = new OneSignalTask();
                         oneSignalTask.execute(adminId, "Ödeme Talebi!");
                         executeTransaction(200000);
+                        Tostcu.succes(getApplicationContext(), "Talebiniz İletildi!");
 
                     }
                 });

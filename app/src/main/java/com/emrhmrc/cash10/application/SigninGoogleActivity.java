@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.emrhmrc.cash10.R;
 import com.emrhmrc.cash10.api.Database;
 import com.emrhmrc.cash10.api.GoogleSignClient;
-import com.emrhmrc.cash10.api.OneSignalTask;
 import com.emrhmrc.cash10.helper.SharedPref;
 import com.emrhmrc.cash10.helper.SingletonUser;
 import com.emrhmrc.cash10.model.UserModel;
@@ -211,11 +210,13 @@ public class SigninGoogleActivity extends AppCompatActivity implements View.OnCl
                             userModel.setStar(0);
                             userModel.setPassword(Utils.getRandomString(5));
                             userModel.setAdmin(false);
+                            userModel.setUsed_ref(false);
                             OneSignal.idsAvailable(new OneSignal.IdsAvailableHandler() {
                                 @Override
                                 public void idsAvailable(String userId, String registrationId) {
                                     Log.d(TAG, "User:" + userId);
                                     userModel.setPlayerId(userId);
+                                    userModel.setRef_code(userId.substring(userId.length()-5));
                                     if (registrationId != null)
                                         Log.d(TAG, "registrationId:" + registrationId);
 

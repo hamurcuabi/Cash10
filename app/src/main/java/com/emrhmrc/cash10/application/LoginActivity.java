@@ -13,11 +13,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.emrehmrc.tostcu.Tostcu;
 import com.emrhmrc.cash10.R;
 import com.emrhmrc.cash10.api.Database;
 import com.emrhmrc.cash10.helper.SharedPref;
 import com.emrhmrc.cash10.helper.SingletonUser;
 import com.emrhmrc.cash10.model.UserModel;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -34,16 +38,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private boolean is_login;
     private UserModel model;
     private SharedPref pref;
-
+    private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        initAdd();
         is_login = false;
         init();
         setEditexts();
         initAnim();
         initClick();
+
 
 
     }
@@ -67,6 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void initClick() {
         btn_login.setOnClickListener(this);
         btn_signup.setOnClickListener(this);
+        txt_forget_password.setOnClickListener(this);
     }
 
     private void logMeIn() {
@@ -99,6 +106,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 //Fail Login
                                 img_logo.clearAnimation();
                                 isEnabled(true);
+                                Tostcu.error(getApplicationContext(),getResources().getString(R
+                                        .string.faillogin));
                             } else {
                                 img_logo.clearAnimation();
                                 isEnabled(true);
@@ -106,6 +115,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 pref.setUserPass(edt_password.getText().toString());
                                 pref.setUserId(model.getDocId());
                                 SingletonUser.getInstance().setUserModel(model);
+                                Tostcu.succes(getApplicationContext(),getResources().getString(R
+                                        .string.succes));
                                 Intent i = new Intent(LoginActivity.this, NewSideHomeMenu.class);
                                 startActivity(i);
                                 overridePendingTransition(R.anim.fleft, R.anim.fhelper);
@@ -150,8 +161,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         rotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
         pref = new SharedPref(getApplicationContext());
         img_logo = findViewById(R.id.img_logo);
-        btn_login = findViewById(R.id.btn_login);
-        btn_signup = findViewById(R.id.btn_signup);
+        btn_login = findViewById(R.id.btn_accept);
+        btn_signup = findViewById(R.id.btn_iptal);
         edt_email = findViewById(R.id.edt_email);
         edt_password = findViewById(R.id.edt_password);
         txt_forget_password = findViewById(R.id.txt_forget_password);
@@ -159,19 +170,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mail_inputlayout = findViewById(R.id.mail_inputlayout);
         small_to_big2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.small_to_big2);
     }
-
+    private void initAdd() {
+        MobileAds.initialize(this,
+                "ca-app-pub-3940256099942544~3347511713");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
 
-            case R.id.btn_login:
+            case R.id.btn_accept:
                 logMeIn();
                 break;
-            case R.id.btn_signup:
+            case R.id.btn_iptal:
                 Intent i = new Intent(LoginActivity.this, SigninGoogleActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.fleft, R.anim.fhelper);
-
+                break;
+            case R.id.txt_forget_password:
+                Intent i2 = new Intent(LoginActivity.this, SigninGoogleActivity.class);
+                startActivity(i2);
+                overridePendingTransition(R.anim.fleft, R.anim.fhelper);
                 break;
 
 

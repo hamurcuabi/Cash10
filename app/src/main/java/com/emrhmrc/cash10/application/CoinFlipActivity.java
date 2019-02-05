@@ -21,13 +21,18 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.emrehmrc.tostcu.Tostcu;
 import com.emrhmrc.cash10.R;
 import com.emrhmrc.cash10.api.Database;
 import com.emrhmrc.cash10.helper.SharedPref;
 import com.emrhmrc.cash10.util.TextFont;
 import com.emrhmrc.cash10.util.Utils;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -59,12 +64,14 @@ public class CoinFlipActivity extends AppCompatActivity implements Animation.Ani
     private ImageView img_point, img_bank, img_diamond, img_popup;
     private Point p;
     private Animation small_to_big;
-
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_flip);
+        initAdd();
         img_popup = findViewById(R.id.popup_info);
         small_to_big = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.small_to_big);
         txt_point = findViewById(R.id.txt_point);
@@ -172,6 +179,25 @@ public class CoinFlipActivity extends AppCompatActivity implements Animation.Ani
         });
     }
 
+    private void initAdd() {
+        MobileAds.initialize(this,
+                "ca-app-pub-3940256099942544~3347511713");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
+        });
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -256,11 +282,13 @@ public class CoinFlipActivity extends AppCompatActivity implements Animation.Ani
             img.clearAnimation();
             if (index == current) {
                 executeTransaction(500);
-                Toast.makeText(getApplicationContext(), "500!!", Toast
-                        .LENGTH_SHORT).show();
+                Tostcu.succes(getApplicationContext(), "500!");
             } else
-                Toast.makeText(getApplicationContext(), "Tekrar Dene", Toast.LENGTH_SHORT).show();
+                Tostcu.error(getApplicationContext(), "Tekrar Dene!");
             isStop = !isStop;
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            }
         }
 
 

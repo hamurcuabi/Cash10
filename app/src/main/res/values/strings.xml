@@ -3,15 +3,15 @@
     <string name="lang">en</string>
     <string name="subtitle">Best App for Earn Cash</string>
     <string name="lets_start">Lets Start</string>
-    <string name="item_three">item three info</string>
-    <string name="title_item_three">title_item_three</string>
-    <string name="item_two">item two</string>
-    <string name="title_item_two">Title_item_two</string>
-    <string name="item_one">Item_one</string>
-    <string name="title_item_one">Title_item_one</string>
-    <string name="slogan">Why Us ?</string>
+    <string name="item_three">Instantly Notifications</string>
+    <string name="title_item_three">Notifications</string>
+    <string name="item_two">Lots of Paymnet Type</string>
+    <string name="title_item_two">Payment Option</string>
+    <string name="item_one">Same day get your money!</string>
+    <string name="title_item_one">Warranty Payment</string>
     <string name="enter_phone_number">Please Enter Your Phone Number</string>
     <string name="enter_code">Please Enter Your Enter Code</string>
+    <string name="slogan">Why Us ?</string>
     <string name="send_message">Send Message</string>
     <string name="accept">Validate</string>
     <string name="sending">Message Sending</string>
@@ -58,13 +58,31 @@
     <string name="info_rulet">Black and Red 500 point but Green 1000 point!</string>
     <string name="info_slot">Press 3 times stop button if 2 pic are same get 500 but if 3 pic are
         same get 1000 point!</string>
-    <string name="paymethode">1) Ödeme Yöntemi Seçiniz</string>
-    <string name="mesaj">Mesaj</string>
-    <string name="send">Gönder</string>
-    <string name="extramsj">2) Hesap No/Banka vb.</string>
+    <string name="paymethode">1) Payment Type</string>
+    <string name="mesaj">Message</string>
+    <string name="send">Send</string>
+    <string name="extramsj">2) Information</string>
     <string name="bilgi">Hesap bilgilerinizi eksiksiz bir şekilde yazınız. Ayrıca eklemek istediğiniz bişeyi de yazabilirsiniz.</string>
     <string name="hesap">Hesap Bilgileriniz</string>
     <string name="banka">2) Gerekli Bilgileri Giriniz</string>
+    <string name="ad">Name</string>
+    <string name="mail">Email</string>
+    <string name="tarih">Date</string>
+    <string name="usermsj">Üye Mesajı</string>
+    <string name="tel">Telephone</string>
+    <string name="metod">Ödeme Şekli</string>
+    <string name="adminmsj">Admin Mesajı</string>
+    <string name="iptal">İptal</string>
+    <string name="onayla">Onayla</string>
+    <string name="mailtel">EMail/Telefon</string>
 
+    <string name="faillogin">Fail Login</string>
+
+    <string name="succes">Succes</string>
+    <string name="market">Elmas Marketi</string>
+    <string name="ref">Referans</string>
+    <string name="refkod">Referans Kodunu Giriniz</string>
+    <string name="reff">Ref.</string>
+    <string name="kodunuz">Kodunuz:</string>
 
 </resources>

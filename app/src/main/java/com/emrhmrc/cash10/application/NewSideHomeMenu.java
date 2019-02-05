@@ -1,25 +1,38 @@
 package com.emrhmrc.cash10.application;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emrehmrc.tostcu.Tostcu;
 import com.emrhmrc.cash10.R;
 import com.emrhmrc.cash10.api.Database;
 import com.emrhmrc.cash10.fragment.BankInfoFrag;
 import com.emrhmrc.cash10.helper.CircleTransform;
 import com.emrhmrc.cash10.helper.SharedPref;
 import com.emrhmrc.cash10.helper.SingletonUser;
+import com.emrhmrc.cash10.model.UserModel;
 import com.emrhmrc.cash10.util.Utils;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
@@ -32,6 +45,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Transaction;
 import com.squareup.picasso.Picasso;
 
@@ -44,8 +59,9 @@ import java.util.Date;
 public class NewSideHomeMenu extends AppCompatActivity implements View.OnClickListener, RewardedVideoAdListener {
     private static final String TAG = "NewSideHomeMenu";
     private final String reward_id = "ca-app-pub-1202140444527551/8027554673";
+    UserModel model;
     private ImageView img_home_avatar, img_wheel, img_addphone, img_slot, img_watchadd,
-            img_diceroll, img_rulet, img_pay, img_kasa, img_notif, img_headcoins;
+            img_diceroll, img_rulet, img_pay, img_kasa, img_notif, img_headcoins, img_ref;
     private TextView txt_user_name, txt_wheel_info, txt_phone_info, txt_slot_info, txt_video_info,
             txt_ref_info, txt_setting_info, txt_pay_info, txt_bank_info;
     private Animation small_to_big, rotate_one, blink;
@@ -54,6 +70,9 @@ public class NewSideHomeMenu extends AppCompatActivity implements View.OnClickLi
     private String point, star, money;
     private WebView img_gif;
     private RewardedVideoAd mRewardedVideoAd;
+    private Point p;
+    private boolean find;
+    private boolean used;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +113,7 @@ public class NewSideHomeMenu extends AppCompatActivity implements View.OnClickLi
         img_pay.setOnClickListener(this);
         img_notif.setOnClickListener(this);
         img_addphone.setOnClickListener(this);
+        img_ref.setOnClickListener(this);
     }
 
     private void initFields() {
@@ -146,6 +166,7 @@ public class NewSideHomeMenu extends AppCompatActivity implements View.OnClickLi
         img_pay = findViewById(R.id.img_pay);
         img_notif = findViewById(R.id.img_notif);
         img_kasa = findViewById(R.id.img_bank);
+        img_ref = findViewById(R.id.img_ref);
 
 
         small_to_big = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.small_to_big2);
@@ -179,7 +200,7 @@ public class NewSideHomeMenu extends AppCompatActivity implements View.OnClickLi
 
     private void goPhone() {
         img_addphone.setEnabled(false);
-        Intent i = new Intent(NewSideHomeMenu.this, SigninPhoneActivity.class);
+        Intent i = new Intent(NewSideHomeMenu.this, MerketActivity.class);
         startActivity(i);
         overridePendingTransition(R.anim.fleft, R.anim.fhelper);
 
@@ -213,17 +234,25 @@ public class NewSideHomeMenu extends AppCompatActivity implements View.OnClickLi
 
     }
 
+    private void goNotifList() {
+        img_notif.setEnabled(false);
+        Intent i = new Intent(NewSideHomeMenu.this, NotifListActivity.class);
+        startActivity(i);
+        overridePendingTransition(R.anim.fleft, R.anim.fhelper);
+
+
+    }
+
 
     private void goPay() {
-        if (Double.parseDouble(money.replace("₺","").trim()) >= 20.0) {
+        if (Double.parseDouble(money.replace("₺", "").trim()) >= 20.0) {
             img_pay.setEnabled(false);
             Intent i = new Intent(NewSideHomeMenu.this, PayActivity.class);
             startActivity(i);
             overridePendingTransition(R.anim.fleft, R.anim.fhelper);
         } else {
 
-            Toast.makeText(getApplicationContext(), "Bakiye En az 20 Tl olmalıdır", Toast
-                    .LENGTH_SHORT).show();
+            Tostcu.warning(getApplicationContext(), "Bakiye En az 20 Tl olmalıdır");
 
         }
 
@@ -261,6 +290,12 @@ public class NewSideHomeMenu extends AppCompatActivity implements View.OnClickLi
             case R.id.img_pay:
                 goPay();
                 break;
+            case R.id.img_notif:
+                goNotifList();
+                break;
+            case R.id.img_ref:
+                if (p != null) showPopup(NewSideHomeMenu.this, p);
+                break;
 
         }
     }
@@ -289,16 +324,14 @@ public class NewSideHomeMenu extends AppCompatActivity implements View.OnClickLi
                 Log.d(TAG, "openAdmob: " + second);
                 int min = second / 60;
 
-                Toast.makeText(this, min + " Dk " + (second - (min * 60)) + " Saniye sonra aktif " +
-                                "olacaktır.",
-                        Toast.LENGTH_SHORT).show();
+                Tostcu.warning(getApplicationContext(), min + " Dk " + (second - (min * 60)) + " Saniye sonra aktif " +
+                        "olacaktır.");
             }
         } catch (ParseException e) {
             e.printStackTrace();
             if (mRewardedVideoAd.isLoaded()) {
                 mRewardedVideoAd.show();
-            } else Toast.makeText(this, "Yüklenmedi Tekrar deneyin!",
-                    Toast.LENGTH_SHORT).show();
+            } else Tostcu.info(getApplicationContext(), "Yüklenmedi Tekrar Deneyin");
         }
 
 
@@ -320,6 +353,8 @@ public class NewSideHomeMenu extends AppCompatActivity implements View.OnClickLi
                 if (documentSnapshot.exists()) {
                     Long point1 = documentSnapshot.getLong("point");
                     Long star1 = documentSnapshot.getLong("star");
+                    boolean is_used = documentSnapshot.getBoolean("used_ref");
+                    used = is_used;
 
                     double tl = (double) point1 / Utils.TL_POINT;
                     money = String.valueOf(tl) + " ₺";
@@ -350,15 +385,13 @@ public class NewSideHomeMenu extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onRewarded(RewardItem reward) {
-        Toast.makeText(this, "onRewarded! currency: " + reward.getType() + "  amount: " +
-                reward.getAmount(), Toast.LENGTH_SHORT).show();
+
         // Reward the user.
     }
 
     @Override
     public void onRewardedVideoAdLeftApplication() {
-        Toast.makeText(this, "onRewardedVideoAdLeftApplication",
-                Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
@@ -395,7 +428,7 @@ public class NewSideHomeMenu extends AppCompatActivity implements View.OnClickLi
 
         String formatted = format1.format(cal.getTime());
         pref.setLastAdTime(formatted);
-        Toast.makeText(this, "1000 Puan!!", Toast.LENGTH_SHORT).show();
+        Tostcu.succes(getApplicationContext(), "1000 Puan!!");
         executeTransaction(1000);
 
     }
@@ -417,7 +450,8 @@ public class NewSideHomeMenu extends AppCompatActivity implements View.OnClickLi
         Database.getDb().runTransaction(new Transaction.Function<Void>() {
             @Override
             public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
-                DocumentReference point = Database.getUserInfo(pref.getUserId());
+                DocumentReference point = Database.getUserInfo(SingletonUser.getInstance()
+                        .getUserModel().getDocId());
                 DocumentSnapshot exampleNoteSnapshot = transaction.get(point);
                 long newPoint = exampleNoteSnapshot.getLong("point") + i;
                 transaction.update(point, "point", newPoint);
@@ -434,5 +468,133 @@ public class NewSideHomeMenu extends AppCompatActivity implements View.OnClickLi
                 Log.d(TAG, "onFailure: ." + e.getMessage());
             }
         });
+    }
+
+    private void executeTransactionRef(final int i, final String id) {
+        Database.getDb().runTransaction(new Transaction.Function<Void>() {
+            @Override
+            public Void apply(@NonNull Transaction transaction) throws FirebaseFirestoreException {
+                DocumentReference point = Database.getUserInfo(id);
+                DocumentSnapshot exampleNoteSnapshot = transaction.get(point);
+                long newPoint = exampleNoteSnapshot.getLong("point") + i;
+                transaction.update(point, "point", newPoint);
+                return null;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                executeTransaction(500);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d(TAG, "onFailure: ." + e.getMessage());
+            }
+        });
+    }
+
+    // The method that displays the popup.
+    private void showPopup(final Activity context, Point p) {
+        // Get the x, y location and store it in the location[] array
+        // location[0] = x, location[1] = y.
+
+        //Initialize the Point with x, and y positions
+
+            int popupWidth = 200;
+            int popupHeight = 150;
+
+            // Inflate the popup_layout.xml
+            LinearLayout viewGroup = context.findViewById(R.id.popuplnr);
+            LayoutInflater layoutInflater = (LayoutInflater) context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View layout = layoutInflater.inflate(R.layout.popup_ref, viewGroup, false);
+
+            // Creating the PopupWindow
+            final PopupWindow popup = new PopupWindow(context);
+            popup.setContentView(layout);
+        /*popup.setWidth(popupWidth);
+        popup.setHeight(popupHeight);*/
+            popup.setFocusable(true);
+
+            // Some offset to align the popup a bit to the right, and a bit down, relative to button's position.
+            int OFFSET_X = 0;
+            int OFFSET_Y = 0;
+            // Clear the default translucent background
+            popup.setBackgroundDrawable(new BitmapDrawable());
+            // Displaying the popup at the specified location, + offsets.
+            popup.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
+
+            // Getting a reference to Close button, and close the popup when clicked.
+            final TextView txt_ref = layout.findViewById(R.id.txt_ref);
+            final TextInputEditText edt_message = layout.findViewById(R.id.edt_message);
+            Button btn_send = layout.findViewById(R.id.btn_send);
+            txt_ref.setText(SingletonUser.getInstance().getUserModel().getRef_code());
+            btn_send.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!TextUtils.isEmpty(edt_message.getText().toString())) {
+                        if (!TextUtils.equals(txt_ref.getText().toString(), edt_message.getText()
+                                .toString())) {
+                            if(!used) {
+                                lookToRef(edt_message.getText().toString());
+                                popup.dismiss();
+                            }
+                            else Tostcu.error(getApplicationContext(), "Referans Kodu Kullanıldı!");
+                        } else {
+                            Tostcu.warning(getApplicationContext(), "Kendi Kodunuzu Giremezsiniz!");
+                        }
+                    } else {
+                        Tostcu.warning(getApplicationContext(), "Kod girilmedi!");
+                    }
+                }
+            });
+
+        }
+
+
+    private void lookToRef(final String code) {
+
+        Database.getUserRef().get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    model = documentSnapshot.toObject(UserModel.class);
+
+                    if (TextUtils.equals(model.getRef_code(), code)) {
+                        find = true;
+                        break;
+
+                    } else find = false;
+
+                }
+                if (find) {
+                    //executeTransaction(500);
+                    executeTransactionRef(500, model.getDocId());
+                    Tostcu.succes(getApplicationContext(), "500 Puan !");
+                    Database.getUserInfo(SingletonUser.getInstance().getUserModel().getDocId())
+                            .update("used_ref", true);
+
+                } else {
+                    Tostcu.error(getApplicationContext(), "Kod Bulunamdı!");
+                }
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+
+        int[] location = new int[2];
+
+        // Get the x, y location and store it in the location[] array
+        // location[0] = x, location[1] = y.
+        img_ref.getLocationOnScreen(location);
+
+        //Initialize the Point with x, and y positions
+        p = new Point();
+        p.x = location[0];
+        p.y = location[1];
     }
 }

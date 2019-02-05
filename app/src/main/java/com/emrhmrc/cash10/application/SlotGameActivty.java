@@ -20,11 +20,17 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.emrehmrc.tostcu.Tostcu;
 import com.emrhmrc.cash10.R;
 import com.emrhmrc.cash10.api.Database;
 import com.emrhmrc.cash10.helper.SharedPref;
 import com.emrhmrc.cash10.util.TextFont;
 import com.emrhmrc.cash10.util.Utils;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -59,12 +65,13 @@ public class SlotGameActivty extends AppCompatActivity {
     private int currentRunnable;
 
     private boolean isResuming;
-
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slot_game_activty);
-
+        initAdd();
         isResuming = false;
         img_popup = findViewById(R.id.popup_info);
         txt_point = findViewById(R.id.txt_point);
@@ -116,7 +123,24 @@ public class SlotGameActivty extends AppCompatActivity {
             }
         });
     }
+    private void initAdd() {
+        MobileAds.initialize(this,
+                "ca-app-pub-3940256099942544~3347511713");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
 
+        });
+    }
     private void startRoll() {
         currentRunnable = 0;
         randomizerRunnables[0] = new RandomizerRunnable(image1);
@@ -155,7 +179,7 @@ public class SlotGameActivty extends AppCompatActivity {
         secondThread.start();
         thirdThread.start();
 
-       start.animate().alpha(0).translationX(300).setDuration(400).start();
+        start.animate().alpha(0).translationX(300).setDuration(400).start();
         start.setEnabled(false);
         stop.animate().alpha(1).translationX(0).setDuration(400).start();
         stop.setEnabled(true);
@@ -184,14 +208,17 @@ public class SlotGameActivty extends AppCompatActivity {
 
             if (image1Tag.equalsIgnoreCase(image2Tag) && image2Tag.equalsIgnoreCase(image3Tag)) {
                 executeTransaction(500);
-                Toast.makeText(this, "500!!", Toast.LENGTH_SHORT).show();
+                Tostcu.succes(getApplicationContext(),"500!");
             } else if (image1Tag.equalsIgnoreCase(image2Tag) || image2Tag.equalsIgnoreCase
                     (image3Tag) || image1Tag.equalsIgnoreCase(image3Tag)) {
 
                 executeTransaction(200);
-                Toast.makeText(this, "200!!", Toast.LENGTH_SHORT).show();
+                Tostcu.succes(getApplicationContext(),"200!");
             } else {
-                Toast.makeText(this, "Tekrar Dene!!", Toast.LENGTH_SHORT).show();
+                Tostcu.error(getApplicationContext(),"Tekrar Dene!");
+            }
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
             }
             start.animate().alpha(1).translationX(0).setDuration(400).start();
             start.setEnabled(true);
@@ -276,51 +303,6 @@ public class SlotGameActivty extends AppCompatActivity {
 
     }
 
-    private class RandomizerRunnable implements Runnable {
-
-        private int currentIndex = 0;
-        private boolean running;
-        private ImageView imageView;
-
-        public RandomizerRunnable(ImageView imageView) {
-            this.imageView = imageView;
-            this.currentIndex = 0;
-            this.running = false;
-        }
-
-        public void setRunning(boolean running) {
-            this.running = running;
-        }
-
-        public int getCurrentIndex() {
-            return currentIndex;
-        }
-
-        public void setCurrentIndex(int currentIndex) {
-            this.currentIndex = currentIndex;
-        }
-
-        @Override
-        public void run() {
-            while (running) {
-                try {
-                    SlotGameActivty.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            imageView.setImageResource(RESOURCE[currentIndex]);
-                            imageView.setTag(TAG[currentIndex]);
-                            imageView.startAnimation(animation);
-                        }
-                    });
-                    Thread.sleep(400);
-                    currentIndex++;
-                    if (currentIndex >= RESOURCE.length) currentIndex = 0;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
 
@@ -372,5 +354,51 @@ public class SlotGameActivty extends AppCompatActivity {
         TextView info = layout.findViewById(R.id.txt_info);
         info.setText(getResources().getString(R.string.info_slot));
 
+    }
+
+    private class RandomizerRunnable implements Runnable {
+
+        private int currentIndex = 0;
+        private boolean running;
+        private ImageView imageView;
+
+        public RandomizerRunnable(ImageView imageView) {
+            this.imageView = imageView;
+            this.currentIndex = 0;
+            this.running = false;
+        }
+
+        public void setRunning(boolean running) {
+            this.running = running;
+        }
+
+        public int getCurrentIndex() {
+            return currentIndex;
+        }
+
+        public void setCurrentIndex(int currentIndex) {
+            this.currentIndex = currentIndex;
+        }
+
+        @Override
+        public void run() {
+            while (running) {
+                try {
+                    SlotGameActivty.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            imageView.setImageResource(RESOURCE[currentIndex]);
+                            imageView.setTag(TAG[currentIndex]);
+                            imageView.startAnimation(animation);
+                        }
+                    });
+                    Thread.sleep(400);
+                    currentIndex++;
+                    if (currentIndex >= RESOURCE.length) currentIndex = 0;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

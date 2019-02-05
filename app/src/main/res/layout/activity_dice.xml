@@ -11,8 +11,10 @@
         android:id="@+id/lnr_wheel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:elevation="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/start"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_diamond">
@@ -26,7 +28,6 @@
             app:layout_constraintEnd_toEndOf="@+id/img2"
             app:layout_constraintStart_toStartOf="@+id/img2"
             app:layout_constraintTop_toTopOf="parent"></Spinner>
-
 
 
         <Spinner
@@ -79,22 +80,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/btn_login"
         android:text="@string/start"
         android:textColor="@color/text_color_dark"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lnr_wheel" />
 
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent"></com.google.android.gms.ads.AdView>
     <ImageView
         android:id="@+id/img_star"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -126,10 +141,9 @@
 
     <ImageView
         android:id="@+id/img_bank"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toStartOf="@+id/txt_bank"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/bank" />
@@ -138,7 +152,7 @@
         android:id="@+id/img_diamond"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_star"

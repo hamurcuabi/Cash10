@@ -23,13 +23,18 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.emrehmrc.tostcu.Tostcu;
 import com.emrhmrc.cash10.R;
 import com.emrhmrc.cash10.api.Database;
 import com.emrhmrc.cash10.helper.SharedPref;
 import com.emrhmrc.cash10.util.TextFont;
 import com.emrhmrc.cash10.util.Utils;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -63,11 +68,14 @@ public class CasinoGameActivity extends AppCompatActivity {
     private DocumentReference pointRef;
     private ImageView img_point, img_bank, img_diamond, img_popup;
     private Point p;
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_casino_game);
+        initAdd();
         img_popup = findViewById(R.id.popup_info);
         small_to_big = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.small_to_big);
         txt_point = findViewById(R.id.txt_point);
@@ -113,6 +121,25 @@ public class CasinoGameActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (p != null) showPopup(CasinoGameActivity.this, p);
             }
+        });
+    }
+
+    private void initAdd() {
+        MobileAds.initialize(this,
+                "ca-app-pub-3940256099942544~3347511713");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
         });
     }
 
@@ -203,12 +230,13 @@ public class CasinoGameActivity extends AppCompatActivity {
                 Log.d(TAG, "index " + index);
                 if (win) {
                     executeTransaction(500);
-                    Toast.makeText(getApplicationContext(), "500!!", Toast
-                            .LENGTH_LONG).show();
+                    Tostcu.succes(getApplicationContext(), "500!");
                 } else if (big_win) {
                     executeTransaction(1000);
-                    Toast.makeText(getApplicationContext(), "1000!!", Toast
-                            .LENGTH_LONG).show();
+                    Tostcu.succes(getApplicationContext(), "1000!");
+                }
+                if (mInterstitialAd.isLoaded()) {
+                    mInterstitialAd.show();
                 }
 
             }

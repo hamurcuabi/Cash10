@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.emrehmrc.tostcu.Tostcu;
 import com.emrhmrc.cash10.R;
 import com.emrhmrc.cash10.WheelGame.LuckyWheelView;
 import com.emrhmrc.cash10.WheelGame.model.LuckyItem;
@@ -26,6 +27,11 @@ import com.emrhmrc.cash10.api.Database;
 import com.emrhmrc.cash10.helper.SharedPref;
 import com.emrhmrc.cash10.util.TextFont;
 import com.emrhmrc.cash10.util.Utils;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
@@ -54,18 +60,40 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
     private DocumentReference pointRef;
     private ImageView img_point, img_bank, img_diamond, img_popup;
     private Point p;
+    private AdView mAdView;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wheel);
         model = whellItems();
+        initAdd();
         init();
         initClick();
         //  canPlay();
         setTextCount(Utils.MAX_WHEEL_COUNT - pref.getWheelPlayed());
         Log.d(TAG, "onCreate: " + pref.getUserId());
 
+    }
+
+    private void initAdd() {
+        MobileAds.initialize(this,
+                "ca-app-pub-3940256099942544~3347511713");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
+        });
     }
 
     private void setTextCount(long i) {
@@ -177,14 +205,16 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         LuckyItem luckyItem2 = new LuckyItem();
         luckyItem2.text = "50";
         luckyItem2.point = 50;
-        luckyItem2.icon = R.drawable.avatar;
+        luckyItem2.with_icon = true;
+        luckyItem2.icon = R.drawable.diamond;
         luckyItem2.color = 0xffFFE0B2;
         data.add(luckyItem2);
 
         LuckyItem luckyItem3 = new LuckyItem();
         luckyItem3.text = "500";
         luckyItem3.point = 500;
-        luckyItem3.icon = R.drawable.phone;
+        luckyItem3.with_icon = true;
+        luckyItem3.icon = R.drawable.diamond;
         luckyItem3.color = 0xffFFCC80;
         data.add(luckyItem3);
 
@@ -192,27 +222,31 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         LuckyItem luckyItem4 = new LuckyItem();
         luckyItem4.text = "40";
         luckyItem4.point = 40;
-        luckyItem4.icon = R.drawable.ads;
+        luckyItem4.with_icon = true;
+        luckyItem4.icon = R.drawable.diamond;
         luckyItem4.color = 0xffFFF3E0;
         data.add(luckyItem4);
 
         LuckyItem luckyItem5 = new LuckyItem();
         luckyItem5.text = "12";
         luckyItem5.point = 12;
-        luckyItem5.icon = R.drawable.avatar;
+        luckyItem5.with_icon = true;
+        luckyItem5.icon = R.drawable.diamond;
         luckyItem5.color = 0xffFFE0B2;
         data.add(luckyItem5);
 
         LuckyItem luckyItem6 = new LuckyItem();
         luckyItem6.text = "350";
         luckyItem6.point = 350;
-        luckyItem6.icon = R.drawable.coins;
+        luckyItem6.with_icon = true;
+        luckyItem6.icon = R.drawable.diamond;
         luckyItem6.color = 0xffFFCC80;
         data.add(luckyItem6);
 
         LuckyItem luckyItem7 = new LuckyItem();
         luckyItem7.text = "8";
         luckyItem7.point = 8;
+        luckyItem7.with_icon = true;
         luckyItem7.icon = R.drawable.diamond;
         luckyItem7.with_icon = true;
         luckyItem7.color = 0xffFFF3E0;
@@ -221,7 +255,8 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         LuckyItem luckyItem8 = new LuckyItem();
         luckyItem8.text = "125";
         luckyItem8.point = 125;
-        luckyItem8.icon = R.drawable.setting;
+        luckyItem8.with_icon = true;
+        luckyItem8.icon = R.drawable.diamond;
         luckyItem8.color = 0xffFFE0B2;
         data.add(luckyItem8);
 
@@ -229,7 +264,8 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         LuckyItem luckyItem9 = new LuckyItem();
         luckyItem9.text = "250";
         luckyItem9.point = 250;
-        luckyItem9.icon = R.drawable.tick;
+        luckyItem9.with_icon = true;
+        luckyItem9.icon = R.drawable.diamond;
         luckyItem9.color = 0xffFFCC80;
         data.add(luckyItem9);
         ////////////////////////
@@ -237,13 +273,15 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         LuckyItem luckyItem10 = new LuckyItem();
         luckyItem10.text = "100";
         luckyItem10.point = 100;
-        luckyItem10.icon = R.drawable.message;
+        luckyItem10.with_icon = true;
+        luckyItem10.icon = R.drawable.diamond;
         luckyItem10.color = 0xffFFF3E0;
         data.add(luckyItem10);
 
         LuckyItem luckyItem11 = new LuckyItem();
         luckyItem11.text = "6";
         luckyItem11.point = 6;
+        luckyItem11.with_icon = true;
         luckyItem11.icon = R.drawable.diamond;
         luckyItem11.with_icon = true;
         luckyItem11.color = 0xffFFE0B2;
@@ -252,6 +290,7 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         LuckyItem luckyItem12 = new LuckyItem();
         luckyItem12.text = "150";
         luckyItem12.point = 150;
+        luckyItem12.with_icon = true;
         luckyItem12.icon = R.drawable.diamond;
         luckyItem12.color = 0xffFFCC80;
         data.add(luckyItem12);
@@ -259,6 +298,7 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         LuckyItem luckyItem13 = new LuckyItem();
         luckyItem13.text = "15";
         luckyItem13.point = 15;
+        luckyItem13.with_icon = true;
         luckyItem13.icon = R.drawable.diamond;
         luckyItem13.color = 0xffFFF3E0;
 
@@ -266,6 +306,7 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         LuckyItem luckyItem14 = new LuckyItem();
         luckyItem14.text = "90";
         luckyItem14.point = 90;
+        luckyItem14.with_icon = true;
         luckyItem14.icon = R.drawable.diamond;
         luckyItem14.color = 0xffFFE0B2;
         data.add(luckyItem14);
@@ -273,6 +314,7 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         LuckyItem luckyItem15 = new LuckyItem();
         luckyItem15.text = "750";
         luckyItem15.point = 750;
+        luckyItem15.with_icon = true;
         luckyItem15.icon = R.drawable.diamond;
         luckyItem15.with_icon = true;
         luckyItem15.color = 0xffFFCC80;
@@ -281,6 +323,7 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         LuckyItem luckyItem16 = new LuckyItem();
         luckyItem16.text = "100";
         luckyItem16.point = 100;
+        luckyItem16.with_icon = true;
         luckyItem16.icon = R.drawable.diamond;
         luckyItem16.color = 0xffFFF3E0;
         data.add(luckyItem16);
@@ -288,6 +331,7 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         LuckyItem luckyItem17 = new LuckyItem();
         luckyItem17.text = "20";
         luckyItem17.point = 20;
+        luckyItem17.with_icon = true;
         luckyItem17.icon = R.drawable.diamond;
         luckyItem17.color = 0xffFFE0B2;
         data.add(luckyItem17);
@@ -295,6 +339,7 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         LuckyItem luckyItem18 = new LuckyItem();
         luckyItem18.text = "120";
         luckyItem18.point = 120;
+        luckyItem18.with_icon = true;
         luckyItem18.icon = R.drawable.diamond;
         luckyItem18.color = 0xffFFCC80;
         data.add(luckyItem18);
@@ -302,6 +347,7 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         LuckyItem luckyItem19 = new LuckyItem();
         luckyItem19.text = "75";
         luckyItem19.point = 75;
+        luckyItem19.with_icon = true;
         luckyItem19.icon = R.drawable.diamond;
         luckyItem19.color = 0xffFFE0B2;
         data.add(luckyItem19);
@@ -330,10 +376,13 @@ public class WheelActivity extends AppCompatActivity implements View.OnClickList
         btn_play.setEnabled(true);
         isTurning = false;
         executeTransaction(model.get(index - 1).point);
-        if ((index) == 1 || (index) == 7 || (index) == 11 || (index) == 14)
-            executeTransactionStar(1);
+        Tostcu.succes(getApplicationContext(), "" + model.get(index - 1).point);
+        executeTransactionStar(1);
         Log.d(TAG, "LuckyRoundItemSelected: " + index);
-
+        Tostcu.succes(getApplicationContext(), "1 Elmas Kazandın!");
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+        }
 
 //        Toast.makeText(getApplicationContext(),""+ model.get(index).point, Toast.LENGTH_SHORT)
 //                .show();
