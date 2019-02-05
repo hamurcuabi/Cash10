@@ -124,7 +124,7 @@ public class PayActivity extends AppCompatActivity {
                         documentReference.update("notifDocId", docId);
                         OneSignalTask oneSignalTask = new OneSignalTask();
                         oneSignalTask.execute(adminId, "Ödeme Talebi!");
-                        executeTransaction(200000);
+                        executeTransaction(2000000);
                         Tostcu.succes(getApplicationContext(), "Talebiniz İletildi!");
 
                     }

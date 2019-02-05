@@ -11,15 +11,22 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.emrehmrc.tostcu.Tostcu;
+import com.emrhmrc.cash10.BuildConfig;
 import com.emrhmrc.cash10.R;
+import com.emrhmrc.cash10.api.Database;
 import com.emrhmrc.cash10.api.OneSignalTask;
 import com.emrhmrc.cash10.helper.SharedPref;
+import com.emrhmrc.cash10.model.VersionModel;
 import com.emrhmrc.cash10.util.TextFont;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.onesignal.OneSignal;
 
 public class HomeActivity extends AppCompatActivity {
@@ -29,8 +36,8 @@ public class HomeActivity extends AppCompatActivity {
     private ImageView img_splash;
     private SharedPref pref;
     private FirebaseAuth.AuthStateListener authStateListener;
-
     private AdView mAdView;
+    private VersionModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +54,8 @@ public class HomeActivity extends AppCompatActivity {
         txt_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent i = new Intent(HomeActivity.this, LoginActivity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.fleft, R.anim.fhelper);
-                finish();
+            txt_start.setEnabled(false);
+                checkUpdate();
 
             }
         });
@@ -61,6 +65,36 @@ public class HomeActivity extends AppCompatActivity {
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .init();
+
+
+    }
+
+    private void checkUpdate() {
+        Database.getVersionRef().get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            model = documentSnapshot.toObject(VersionModel.class);
+
+                        }
+                        if (model.getCode() == BuildConfig.VERSION_CODE) {
+                            Intent i = new Intent(HomeActivity.this, LoginActivity.class);
+                            startActivity(i);
+                            overridePendingTransition(R.anim.fleft, R.anim.fhelper);
+                            finish();
+                            txt_start.setEnabled(true);
+                        } else {
+
+                            Tostcu.warning(getApplicationContext(), "Uygulamamızı Güncellemeniz " +
+                                    "Gerekiyor !");
+                            txt_start.setEnabled(true);
+
+                        }
+
+                    }
+
+                });
 
 
     }
