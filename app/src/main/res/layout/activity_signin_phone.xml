@@ -9,7 +9,7 @@
     android:background="@color/background">
 
 
-    <com.emrhmrc.cash10.util.MaskedEditText
+    <com.mutluay.cash10.util.MaskedEditText
         android:id="@+id/edt_phone_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         mask:allowed_chars="1234567890"
         mask:mask="+90 (###) ### ## ##" />
 
-    <com.emrhmrc.cash10.util.MaskedEditText
+    <com.mutluay.cash10.util.MaskedEditText
         android:id="@+id/edt_code_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

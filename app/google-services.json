@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "26759226132",
-    "firebase_url": "https://parakazanapp.firebaseio.com",
-    "project_id": "parakazanapp",
-    "storage_bucket": "parakazanapp.appspot.com"
+    "project_number": "948852786665",
+    "firebase_url": "https://finalcash10.firebaseio.com",
+    "project_id": "finalcash10",
+    "storage_bucket": "finalcash10.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:26759226132:android:bbaa750b3519b15d",
+        "mobilesdk_app_id": "1:948852786665:android:75a01b84e94317af",
         "android_client_info": {
-          "package_name": "com.emrhmrc.cash10"
+          "package_name": "com.mutluay.cash10"
         }
       },
       "oauth_client": [
         {
-          "client_id": "26759226132-l3i762rsa5fmfbgod4vq8nc9p4nh4347.apps.googleusercontent.com",
+          "client_id": "948852786665-j9edu3jekpm12ko925o9ev32slss7p9u.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.emrhmrc.cash10",
+            "package_name": "com.mutluay.cash10",
             "certificate_hash": "4b607285c3f585974ed6c506abc2b4e81bc4595a"
           }
         },
         {
-          "client_id": "26759226132-fasbq3lnbmjdkhglk9293cngsc9bjb8g.apps.googleusercontent.com",
+          "client_id": "948852786665-jgm85jufucd1p9tmf2bghstk09lsnu0k.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBJc4ie5q7mLBxXOfVscNrzDiJq17qhntc"
+          "current_key": "AIzaSyD36BQu3kH2AO4hCansHMmU80Qf1AGnj0I"
         }
       ],
       "services": {
@@ -40,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "26759226132-fasbq3lnbmjdkhglk9293cngsc9bjb8g.apps.googleusercontent.com",
+              "client_id": "948852786665-jgm85jufucd1p9tmf2bghstk09lsnu0k.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -48,7 +48,8 @@
         "ads_service": {
           "status": 2
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-1202140444527551~2554318838"
     }
   ],
   "configuration_version": "1"

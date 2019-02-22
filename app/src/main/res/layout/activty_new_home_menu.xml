@@ -1,363 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-android:background="@color/colorPrimaryDark"
-android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/txt_online"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@color/text_color_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/img_wheel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-<WebView
-    android:visibility="gone"
-    android:id="@+id/img_gif"
-    android:layout_width="0dp"
-    android:layout_height="0dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/img_home_avatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/txt_username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Emre Hamrucu"
+        android:textColor="@color/text_color_dark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/img_home_avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_home_avatar"
+        app:layout_constraintTop_toTopOf="@+id/img_home_avatar" />
 
-<ImageView
-    android:id="@+id/img_home_avatar"
-    android:layout_width="48dp"
-    android:layout_height="48dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="16dp"
-    android:src="@drawable/avatar"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Cash10"
+        android:textColor="@color/text_color_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_home_avatar" />
 
-<TextView
-    android:id="@+id/txt_username"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:text="Emre Hamrucu"
-    android:textColor="@color/text_color_dark"
-    android:textSize="20sp"
-    android:textStyle="bold"
-    app:layout_constraintBottom_toBottomOf="@+id/img_home_avatar"
-    app:layout_constraintStart_toEndOf="@+id/img_home_avatar"
-    app:layout_constraintTop_toTopOf="@+id/img_home_avatar" />
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Mobilden Para Kazanmak Çok Kolay"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-<TextView
-    android:id="@+id/textView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="8dp"
-    android:text="@string/games"
-    android:textColor="@color/text_color_dark"
-    android:textSize="18sp"
-    android:textStyle="bold"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/img_home_avatar" />
+    <ImageView
+        android:id="@+id/img_wheel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/whell"
+        app:layout_constraintBottom_toTopOf="@+id/img_pay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-<TextView
-    android:id="@+id/textView2"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:text="@string/gameinfo"
-    android:textColor="@android:color/white"
-    android:textSize="14sp"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-<ImageView
-    android:id="@+id/img_wheel"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="8dp"
-    android:src="@drawable/whell"
-    app:layout_constraintEnd_toStartOf="@+id/img_slot"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-<TextView
-    android:id="@+id/txt_wheel"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginTop="8dp"
-    android:text="@string/cevir_kazan"
-    android:textColor="@color/text_color_dark"
-    android:textSize="14sp"
-    app:layout_constraintEnd_toEndOf="@+id/img_wheel"
-    app:layout_constraintStart_toStartOf="@+id/img_wheel"
-    app:layout_constraintTop_toBottomOf="@+id/img_wheel" />
-
-
-<ImageView
-
-    android:id="@+id/img_slot"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="8dp"
-    android:src="@drawable/slot"
-    app:layout_constraintEnd_toStartOf="@+id/img_watchads"
-    app:layout_constraintStart_toEndOf="@id/img_wheel"
-    app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-<TextView
-    android:id="@+id/txt_slot"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginTop="8dp"
-    android:text="@string/slot"
-    android:textColor="@color/text_color_dark"
-    android:textSize="14sp"
-    app:layout_constraintEnd_toEndOf="@+id/img_slot"
-    app:layout_constraintStart_toStartOf="@+id/img_slot"
-    app:layout_constraintTop_toBottomOf="@+id/img_slot" />
-
-<ImageView
-    android:id="@+id/img_watchads"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="16dp"
-    android:src="@drawable/watchad"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toEndOf="@id/img_slot"
-    app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-<TextView
-    android:id="@+id/txt_watchadds"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginTop="8dp"
-    android:text="@string/watchwin"
-    android:textColor="@color/text_color_dark"
-    android:textSize="14sp"
-    app:layout_constraintEnd_toEndOf="@+id/img_watchads"
-    app:layout_constraintStart_toStartOf="@+id/img_watchads"
-    app:layout_constraintTop_toBottomOf="@+id/img_watchads" />
-
-<ImageView
-    android:id="@+id/img_headcoins"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="16dp"
-    android:src="@drawable/cointoss"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toEndOf="@id/img_rulet"
-    app:layout_constraintTop_toBottomOf="@+id/txt_watchadds" />
-
-<TextView
-    android:id="@+id/txt_headcoins"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginTop="8dp"
-    android:text="@string/toss"
-    android:textColor="@color/text_color_dark"
-    android:textSize="14sp"
-    app:layout_constraintEnd_toEndOf="@+id/img_headcoins"
-    app:layout_constraintStart_toStartOf="@+id/img_headcoins"
-    app:layout_constraintTop_toBottomOf="@+id/img_headcoins" />
+    <TextView
+        android:id="@+id/txt_wheel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/cevir_kazan"
+        android:textColor="@color/text_color_dark"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/img_wheel"
+        app:layout_constraintStart_toStartOf="@+id/img_wheel"
+        app:layout_constraintTop_toBottomOf="@+id/img_wheel" />
 
 
-<ImageView
-    android:id="@+id/img_diceroll"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
-    android:src="@drawable/dices"
-    android:layout_marginTop="16dp"
-    app:layout_constraintStart_toStartOf="@id/img_wheel"
-    app:layout_constraintTop_toBottomOf="@+id/txt_wheel" />
+    <ImageView
+        android:id="@+id/img_watchads"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/watchad"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toStartOf="@+id/img_pay"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_wheel" />
 
-<TextView
-    android:id="@+id/txt_diceroll"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginTop="8dp"
-    android:text="@string/diceroll"
-    android:textColor="@color/text_color_dark"
-    android:textSize="14sp"
-    app:layout_constraintEnd_toEndOf="@+id/img_diceroll"
-    app:layout_constraintStart_toStartOf="@+id/img_diceroll"
-    app:layout_constraintTop_toBottomOf="@+id/img_diceroll" />
+    <TextView
+        android:id="@+id/txt_watchadds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:text="@string/watchwin"
+        android:textColor="@color/text_color_dark"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/img_watchads"
+        app:layout_constraintStart_toStartOf="@+id/img_watchads"
+        app:layout_constraintTop_toBottomOf="@+id/img_watchads" />
 
-<ImageView
-    android:id="@+id/img_rulet"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
-    android:src="@drawable/rulet"
-    android:layout_marginTop="16dp"
-    app:layout_constraintStart_toStartOf="@id/img_slot"
-    app:layout_constraintTop_toBottomOf="@+id/txt_wheel"
+    <ImageView
+        android:id="@+id/img_pay"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/paying"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toStartOf="@+id/img_notif"
+        app:layout_constraintStart_toEndOf="@+id/img_watchads"
+        app:layout_constraintTop_toBottomOf="@+id/txt_wheel" />
 
-    />
+    <TextView
+        android:id="@+id/txt_pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/getpay"
+        android:textColor="@color/text_color_dark"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/img_pay"
+        app:layout_constraintTop_toBottomOf="@+id/img_pay" />
 
-<TextView
-    android:id="@+id/txt_rulet"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:text="@string/rulet"
-    android:textColor="@color/text_color_dark"
-    android:textSize="14sp"
-    app:layout_constraintEnd_toEndOf="@+id/img_rulet"
-    app:layout_constraintStart_toStartOf="@+id/img_rulet"
-    app:layout_constraintTop_toBottomOf="@+id/img_rulet" />
+    <ImageView
+        android:id="@+id/img_notif"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
 
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ads"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/img_pay"
+        app:layout_constraintTop_toBottomOf="@+id/txt_wheel" />
 
-<TextView
-    android:id="@+id/textView6"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="24dp"
-    android:text="@string/diger"
-    android:textColor="@color/text_color_dark"
-    android:textSize="18sp"
-    android:textStyle="bold"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/txt_diceroll" />
-
-<TextView
-    android:id="@+id/textview4"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:text="@string/otherinfo"
-    android:textColor="@android:color/white"
-    android:textSize="14sp"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-<ImageView
-    android:id="@+id/img_addphone"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
-    android:layout_marginStart="24dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="8dp"
-    android:src="@drawable/cart"
-    app:layout_constraintEnd_toStartOf="@+id/img_slot"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textview4" />
-
-<TextView
-    android:id="@+id/txt_addphone"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginTop="8dp"
-    android:text="@string/market"
-    android:textColor="@color/text_color_dark"
-    android:textSize="14sp"
-    app:layout_constraintEnd_toEndOf="@+id/img_addphone"
-    app:layout_constraintStart_toStartOf="@+id/img_addphone"
-    app:layout_constraintTop_toBottomOf="@+id/img_addphone" />
+    <TextView
+        android:id="@+id/txt_notif"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/notif"
+        android:textColor="@color/text_color_dark"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/img_notif"
+        app:layout_constraintTop_toBottomOf="@+id/img_notif" />
 
 
-<ImageView
-    android:id="@+id/img_pay"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="8dp"
-    android:src="@drawable/paying"
-    app:layout_constraintEnd_toStartOf="@+id/img_notif"
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    app:layout_constraintStart_toStartOf="@id/img_slot"
-    app:layout_constraintTop_toBottomOf="@+id/textview4" />
+        <ImageView
+            android:id="@+id/facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/facebook" />
 
-<TextView
-    android:id="@+id/txt_pay"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:text="@string/getpay"
-    android:textColor="@color/text_color_dark"
-    android:textSize="14sp"
-    app:layout_constraintStart_toStartOf="@+id/img_pay"
-    app:layout_constraintTop_toBottomOf="@+id/img_pay" />
+        <ImageView
+            android:id="@+id/whatsapp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/whatsapp" />
 
-<ImageView
-    android:id="@+id/img_notif"
-    android:layout_width="64dp"
-    android:layout_height="64dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="24dp"
+        <ImageView
+            android:id="@+id/instagram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/instagram" />
 
-    android:src="@drawable/ads"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="@id/img_watchads"
-    app:layout_constraintTop_toBottomOf="@+id/textview4" />
-
-<TextView
-    android:id="@+id/txt_notif"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:text="@string/notif"
-    android:textColor="@color/text_color_dark"
-    android:textSize="14sp"
-    app:layout_constraintEnd_toEndOf="@+id/img_notif"
-    app:layout_constraintStart_toStartOf="@+id/img_notif"
-    app:layout_constraintTop_toBottomOf="@+id/img_notif" />
-
-<ImageView
-    android:id="@+id/img_bank"
-    android:layout_width="32dp"
-    android:layout_height="32dp"
-    android:layout_marginTop="16dp"
-    android:layout_marginEnd="8dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:srcCompat="@drawable/bank" />
-
-<ImageView
-    android:id="@+id/img_ref"
-    android:layout_width="32dp"
-    android:layout_height="32dp"
-    android:layout_marginEnd="8dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/txt_ref"
-    app:srcCompat="@drawable/avatar" />
-
-<TextView
-    android:id="@+id/txt_bak_info"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="8dp"
-    android:text="@string/reff"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/img_ref" />
-
-<TextView
-    android:id="@+id/txt_ref"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:text="@string/bankinfo"
-    app:layout_constraintEnd_toEndOf="@+id/img_bank"
-    app:layout_constraintStart_toStartOf="@+id/img_bank"
-    app:layout_constraintTop_toBottomOf="@+id/img_bank" />
+        <ImageView
+            android:id="@+id/youtube"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/youtube" />
 
 
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
-
-</ScrollView>

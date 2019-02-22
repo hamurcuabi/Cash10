@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.emrhmrc.cash10">
+    package="com.mutluay.cash10">
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,7 @@
             android:value="ca-app-pub-1202140444527551~5620883183" />
 
         <activity
-            android:name=".application.HomeActivity"
+            android:name="com.mutluay.cash10.application.HomeActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,33 +22,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".application.SigninGoogleActivity" />
+        <activity android:name="com.mutluay.cash10.application.SigninGoogleActivity" />
         <activity
-            android:name=".application.SigninPhoneActivity"
+            android:name="com.mutluay.cash10.application.SigninPhoneActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateVisible" />
         <activity
-            android:name=".application.SideHomeMenu"
+            android:name="com.mutluay.cash10.application.SideHomeMenu"
             android:launchMode="singleTop" />
         <activity
-            android:name=".application.WheelActivity"
+            android:name="com.mutluay.cash10.application.WheelActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name=".application.LoginActivity"
+            android:name="com.mutluay.cash10.application.LoginActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".application.SlotGameActivty"
+            android:name="com.mutluay.cash10.application.SlotGameActivty"
             android:launchMode="singleTop" />
         <activity
-            android:name=".application.NewSideHomeMenu"
+            android:name="com.mutluay.cash10.application.NewSideHomeMenu"
             android:launchMode="singleTask" />
-        <activity android:name=".application.CasinoGameActivity" />
-        <activity android:name=".application.CoinFlipActivity" />
-        <activity android:name=".application.DiceActivity" />
-        <activity android:name=".application.PayActivity" />
-        <activity android:name=".application.NotifListActivity" />
-        <activity android:name=".application.NotifDetailActivity" />
-        <activity android:name=".application.MerketActivity"></activity>
+        <activity android:name="com.mutluay.cash10.application.CasinoGameActivity" />
+        <activity android:name="com.mutluay.cash10.application.CoinFlipActivity" />
+        <activity android:name="com.mutluay.cash10.application.DiceActivity" />
+        <activity android:name="com.mutluay.cash10.application.PayActivity" />
+        <activity android:name="com.mutluay.cash10.application.NotifListActivity" />
+        <activity android:name="com.mutluay.cash10.application.NotifDetailActivity" />
+        <activity android:name="com.mutluay.cash10.application.MerketActivity"></activity>
+
+        <service
+            android:name=".helper.MyServices"
+            android:stopWithTask="false" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="d0ee792be17ba920ef76c8d31ef307264a013d6c" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

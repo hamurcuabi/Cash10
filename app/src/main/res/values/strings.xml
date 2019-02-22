@@ -53,17 +53,17 @@
     <string name="flip">Flip Coin</string>
     <string name="info">Info</string>
     <string name="info_whell">Turn wheel and get point from the value up to!</string>
-    <string name="info_dice">Guess dices and get 500 point for every true!</string>
-    <string name="info_coin">Head or Toss guess and get 500 point!</string>
-    <string name="info_rulet">Black and Red 500 point but Green 1000 point!</string>
-    <string name="info_slot">Press 3 times stop button if 2 pic are same get 500 but if 3 pic are
-        same get 1000 point!</string>
+    <string name="info_dice">Guess dices and get 100 point for every true!</string>
+    <string name="info_coin">Head or Toss guess and get 100 point!</string>
+    <string name="info_rulet">Black and Red 100 point but Green 200 point!</string>
+    <string name="info_slot">Press 3 times stop button if 2 pic are same get 100 but if 3 pic are
+        same get 200 point!</string>
     <string name="paymethode">1) Payment Type</string>
     <string name="mesaj">Message</string>
     <string name="send">Send</string>
     <string name="extramsj">2) Information</string>
     <string name="bilgi">Hesap bilgilerinizi eksiksiz bir şekilde yazınız. Ayrıca eklemek istediğiniz bişeyi de yazabilirsiniz.</string>
-    <string name="hesap">Hesap Bilgileriniz</string>
+    <string name="hesap">Iban Numaranız / Bilgileriniz...</string>
     <string name="banka">2) Gerekli Bilgileri Giriniz</string>
     <string name="ad">Name</string>
     <string name="mail">Email</string>

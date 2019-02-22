@@ -3,11 +3,11 @@
     android:orientation="vertical" 
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.emrhmrc.cash10.WheelGame.PielView
+    <com.mutluay.cash10.WheelGame.PielView
         android:id="@+id/pieView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    </com.emrhmrc.cash10.WheelGame.PielView>
+    </com.mutluay.cash10.WheelGame.PielView>
     
     <ImageView
         android:layout_gravity="center_horizontal"

@@ -53,18 +53,18 @@
     <string name="flip">Parayı Fırlat</string>
     <string name="info">Bilgilendirme</string>
     <string name="info_whell">Çarkı çevir ve gelen değer kadar puan ve elmas kazan!</string>
-    <string name="info_dice">Zardan geleni tahmin et ve her doğru tahmin için 500 puan al!</string>
-    <string name="info_coin">Dolar mı , 3 Yaprak mı tahmin et 500 puan al!</string>
-    <string name="info_slot">Durdur butonuna 3 defa tıkla eğer 2 resim aynı ise 500, 3 ü aynı ise
-        1000 puan al</string>
-    <string name="info_rulet">Siyah ve Kırmızı tahminleri için 500 ,Yeşil tahmini için
+    <string name="info_dice">Zardan geleni tahmin et ve her doğru tahmin için 100 puan al!</string>
+    <string name="info_coin">Dolar mı , 3 Yaprak mı tahmin et 100 puan al!</string>
+    <string name="info_slot">Durdur butonuna 3 defa tıkla eğer 2 resim aynı ise 100, 3 ü aynı ise
+        200 puan al</string>
+    <string name="info_rulet">Siyah ve Kırmızı tahminleri için 100 ,Yeşil tahmini için
         1000 puan al!</string>
     <string name="paymethode">1) Ödeme Yöntemi Seçiniz</string>
     <string name="mesaj">Mesaj</string>
     <string name="send">Gönder</string>
     <string name="extramsj">2) Eklemek İstediklerin</string>
     <string name="bilgi">Hesap bilgilerinizi eksiksiz bir şekilde yazınız. Ayrıca eklemek istediğiniz bişeyi de yazabilirsiniz.</string>
-    <string name="hesap">Hesap Bilgileriniz</string>
+    <string name="hesap">Iban Numaranız / Bilgileriniz...</string>
     <string name="banka">2) Gerekli Bilgileri Giriniz</string>
     <string name="ad">Ad Soyad</string>
     <string name="mail">Email</string>
